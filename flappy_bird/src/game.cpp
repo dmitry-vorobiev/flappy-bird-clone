@@ -1,4 +1,5 @@
 #include "game.h"
+#include "input.h"
 
 #include <iostream>
 
@@ -51,6 +52,8 @@ void Game::init()
 		(vidmode->height - m_height) / 2
 	);
 
+	glfwSetKeyCallback(m_window, input::key_callback);
+
 	glfwMakeContextCurrent(m_window);
 	glfwShowWindow(m_window);
 	glfwSwapInterval(1);
@@ -59,6 +62,15 @@ void Game::init()
 void Game::update()
 {
 	glfwPollEvents();
+	
+	if (input::is_key_pressed(GLFW_KEY_SPACE))
+	{
+		std::cout << "Test" << std::endl;
+	}
+	else if (input::is_key_pressed(GLFW_KEY_ESCAPE))
+	{
+		glfwSetWindowShouldClose(m_window, GL_TRUE);
+	}
 }
 
 void Game::render()
