@@ -4,9 +4,11 @@
 #include <iostream>
 
 Game::Game(int width, int height)
-	:m_width(width), m_height(height), m_active(false) {}
+	:m_width(width), m_height(height), m_active(false), m_window(nullptr) 
+{}
 
-Game::~Game() {
+Game::~Game() 
+{
 	glfwDestroyWindow(m_window);
 	glfwTerminate();
 }
@@ -56,7 +58,12 @@ void Game::init()
 
 	glfwMakeContextCurrent(m_window);
 	glfwShowWindow(m_window);
+
 	glfwSwapInterval(1);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	glEnable(GL_DEPTH_TEST);
+
+	std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
 }
 
 void Game::update()
@@ -75,5 +82,6 @@ void Game::update()
 
 void Game::render()
 {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glfwSwapBuffers(m_window);
 }
