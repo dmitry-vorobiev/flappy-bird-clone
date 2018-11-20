@@ -1,7 +1,4 @@
-#define GLEW_STATIC
-
-#include <GL/glew.h>
-
+#include "ext_deps.h"
 #include "utils.h"
 
 #include <cstdio>

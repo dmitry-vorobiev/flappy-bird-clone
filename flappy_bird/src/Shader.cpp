@@ -1,8 +1,6 @@
-#define GLEW_STATIC
-
-#include <GL/glew.h>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "ext_deps.h"
 #include "shader.h"
 #include "errors.h"
 #include "utils.h"
