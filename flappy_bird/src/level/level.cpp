@@ -21,10 +21,10 @@ void Level::init()
 	constexpr float y = 10.0f * 9.0f / 16.0f;
 
 	float vertices[] {
-		-10.0f, -y,
-		-10.0f,  y,
-		 0.0f,   y,
-		 0.0f,  -y,
+		-10.0f, -y,  0.0f,
+		-10.0f,  y,  0.0f,
+		 0.0f,   y,  0.0f,
+		 0.0f,  -y,  0.0f
 	};
 
 	float tex_coords[] {
@@ -39,12 +39,12 @@ void Level::init()
 		2, 3, 0
 	};
 
-	m_background = VertexArray();
 	m_background.init();
+	m_background.bind();
 
-	VertexBuffer vb(&vertices, 4 * 2 * sizeof(float));
+	VertexBuffer vb(&vertices, 4 * 3 * sizeof(float));
 	VertexBufferLayout vb_layout;
-	vb_layout.push<float>(2);
+	vb_layout.push<float>(3);
 	m_background.addBuffer(vb, vb_layout);
 
 	VertexBuffer tc(&tex_coords, 4 * 2 * sizeof(float));
@@ -64,10 +64,12 @@ void Level::init()
 	vb.unbind();
 	tc.unbind();
 	ib.unbind();
+	m_shader.unbind();
 }
 
 void Level::render()
 {
 	m_background.bind();
-	DEBUG(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nullptr));
+	m_shader.bind();
+	DEBUG(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 }
