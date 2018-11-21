@@ -11,10 +11,12 @@
 #include <sstream>
 
 
-Shader::Shader(const std::string& vert_src_path, const std::string& frag_src_path)
-{
-	m_ID = shader_utils::build(vert_src_path, frag_src_path);
-}
+Shader::Shader(
+	const std::string& vert_src_path, 
+	const std::string& frag_src_path
+)
+	:m_ID(0), m_vert_path(vert_src_path), m_frag_path(frag_src_path)
+{}
 
 Shader::~Shader()
 {
@@ -29,6 +31,11 @@ void Shader::bind() const
 void Shader::unbind() const
 {
 	DEBUG(glUseProgram(0));
+}
+
+void Shader::init()
+{
+	m_ID = shader_utils::build(m_vert_path, m_frag_path);
 }
 
 void Shader::set_uniform_1i(const std::string& name, int value)

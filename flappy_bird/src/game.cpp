@@ -4,7 +4,8 @@
 #include <iostream>
 
 Game::Game(int width, int height)
-	:m_width(width), m_height(height), m_active(false), m_window(nullptr) 
+	:m_width(width), m_height(height), m_active(false), 
+	m_window(nullptr)
 {}
 
 Game::~Game() 
@@ -57,13 +58,25 @@ void Game::init()
 	glfwSetKeyCallback(m_window, input::key_callback);
 
 	glfwMakeContextCurrent(m_window);
-	glfwShowWindow(m_window);
-
 	glfwSwapInterval(1);
+
+	glewExperimental = GL_TRUE;
+	if (glewInit() != GLEW_OK)
+	{
+		std::cout << "Failed to initialize GLEW" << std::endl;
+		return;
+	}
+
+	int w, h;
+	glfwGetFramebufferSize(m_window, &w, &h);
+	glViewport(0, 0, w, h);
+
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
 
 	std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
+
+	m_level.init();
 }
 
 void Game::update()
@@ -83,5 +96,6 @@ void Game::update()
 void Game::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	m_level.render();
 	glfwSwapBuffers(m_window);
 }

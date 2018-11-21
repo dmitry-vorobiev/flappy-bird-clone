@@ -132,6 +132,10 @@
   <ItemGroup>
     <ClCompile Include="src\errors.cpp" />
     <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\graphics\index_buffer.cpp" />
+    <ClCompile Include="src\graphics\vertex_array.cpp" />
+    <ClCompile Include="src\graphics\vertex_buffer.cpp" />
+    <ClCompile Include="src\level\level.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\shader.cpp" />
     <ClCompile Include="src\texture.cpp" />
@@ -141,10 +145,19 @@
     <ClInclude Include="src\errors.h" />
     <ClInclude Include="src\ext_deps.h" />
     <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\graphics\index_buffer.h" />
+    <ClInclude Include="src\graphics\vertex_array.h" />
+    <ClInclude Include="src\graphics\vertex_buffer.h" />
+    <ClInclude Include="src\graphics\vertex_buffer_layout.h" />
     <ClInclude Include="src\input.h" />
+    <ClInclude Include="src\level\level.h" />
     <ClInclude Include="src\shader.h" />
     <ClInclude Include="src\texture.h" />
     <ClInclude Include="src\utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\graphics\shaders\bg.frag.shader" />
+    <None Include="src\graphics\shaders\bg.vert.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

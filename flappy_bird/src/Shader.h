@@ -9,6 +9,7 @@ class Shader
 {
 private:
 	unsigned int m_ID;
+	std::string m_vert_path, m_frag_path;
 	std::unordered_map<std::string, int> m_uniform_locations;
 
 public:
@@ -17,6 +18,8 @@ public:
 
 	void bind() const;
 	void unbind() const;
+
+	void init();
 
 	void set_uniform_1i(const std::string& name, int value);
 	void set_uniform_4f(const std::string& name, float v0, float v1, float v2, float v3);
