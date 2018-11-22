@@ -1,24 +1,24 @@
-#include "ext_deps.h"
 #include "texture.h"
-#include "errors.h"
+#include "../ext_deps.h"
+#include "../errors.h"
 
 #include "nothings/stb/stb_image.h"
 
 Texture::Texture(const std::string& path)
-	: m_ID(0), m_buffer(nullptr), m_width(0), m_height(0), m_BPP(0)
+	: m_rendererID(0), m_buffer(nullptr), m_width(0), m_height(0), m_BPP(0)
 {
 	load(path);
 }
 
 Texture::~Texture()
 {
-	DEBUG(glDeleteTextures(1, &m_ID));
+	DEBUG(glDeleteTextures(1, &m_rendererID));
 }
 
 void Texture::bind(unsigned int slot) const
 {
 	DEBUG(glActiveTexture(GL_TEXTURE0 + slot));
-	DEBUG(glBindTexture(GL_TEXTURE_2D, m_ID));
+	DEBUG(glBindTexture(GL_TEXTURE_2D, m_rendererID));
 }
 
 void Texture::unbind() const
@@ -31,8 +31,8 @@ void Texture::load(const std::string& path)
 	stbi_set_flip_vertically_on_load(1);
 	m_buffer = stbi_load(path.c_str(), &m_width, &m_height, &m_BPP, 4);
 
-	DEBUG(glGenTextures(1, &m_ID));
-	DEBUG(glBindTexture(GL_TEXTURE_2D, m_ID));
+	DEBUG(glGenTextures(1, &m_rendererID));
+	DEBUG(glBindTexture(GL_TEXTURE_2D, m_rendererID));
 
 	DEBUG(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
 	DEBUG(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));

@@ -137,8 +137,8 @@
     <ClCompile Include="src\graphics\vertex_buffer.cpp" />
     <ClCompile Include="src\level\level.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\shader.cpp" />
-    <ClCompile Include="src\texture.cpp" />
+    <ClCompile Include="src\graphics\shader.cpp" />
+    <ClCompile Include="src\graphics\texture.cpp" />
     <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,8 +151,8 @@
     <ClInclude Include="src\graphics\vertex_buffer_layout.h" />
     <ClInclude Include="src\input.h" />
     <ClInclude Include="src\level\level.h" />
-    <ClInclude Include="src\shader.h" />
-    <ClInclude Include="src\texture.h" />
+    <ClInclude Include="src\graphics\shader.h" />
+    <ClInclude Include="src\graphics\texture.h" />
     <ClInclude Include="src\utils.h" />
   </ItemGroup>
   <ItemGroup>

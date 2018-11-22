@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../graphics/vertex_array.h"
-#include "../shader.h"
+#include "../graphics/shader.h"
 
 class Level
 {

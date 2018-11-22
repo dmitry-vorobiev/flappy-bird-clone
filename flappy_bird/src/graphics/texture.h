@@ -5,7 +5,7 @@
 class Texture
 {
 private:
-	unsigned int m_ID;
+	unsigned int m_rendererID;
 	unsigned char* m_buffer;
 	int m_width, m_height, m_BPP;
 public:

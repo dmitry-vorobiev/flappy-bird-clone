@@ -22,31 +22,24 @@ Level::Level()
 		 0.0f,  -y,  1.0f, 1.0f
 	};
 
-	float tex_coords[] {
-		0.0f, 1.0f,
-		0.0f, 0.0f,
-		1.0f, 0.0f,
-		1.0f, 1.0f
-	};
-
 	unsigned int indices[] {
 		0, 1, 2,
 		2, 3, 0
 	};
 
 	VertexBuffer vb(&vertices, 4 * 4 * sizeof(float));
-	VertexBufferLayout vb_layout;
-	vb_layout.push<float>(2);
-	vb_layout.push<float>(2);
+	VertexBufferLayout layout;
+	layout.push<float>(2);
+	layout.push<float>(2);
 
-	m_background.addBuffer(vb, vb_layout);
+	m_background.addBuffer(vb, layout);
 
 	IndexBuffer ib(indices, 6);
 
 	glm::mat4 proj_matrix = glm::ortho(-10.0f, 10.0f, -y, y, -1.0f, 1.0f);
 
 	m_shader.bind();
-	m_shader.set_uniform_mat4f("u_proj_matrix", proj_matrix);
+	m_shader.setUniformMat4f("u_projMatrix", proj_matrix);
 
 	m_background.unbind();
 	vb.unbind();
