@@ -10,8 +10,6 @@ Game::Game(GLFWwindow* window, int width, int height)
 
 Game::~Game() 
 {
-	glfwDestroyWindow(m_window);
-	glfwTerminate();
 }
 
 void Game::run()

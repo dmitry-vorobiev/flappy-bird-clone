@@ -13,6 +13,5 @@ public:
 	Level();
 	~Level();
 
-	void init();
 	void render();
 };

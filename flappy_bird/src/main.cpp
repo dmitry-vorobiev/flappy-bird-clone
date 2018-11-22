@@ -52,8 +52,13 @@ int main()
 
 	std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
 
-	Game game(window, width, height);
-	game.run();
+	{
+		Game game(window, width, height);
+		game.run();
+	}
+
+	glfwDestroyWindow(window);
+	glfwTerminate();
 
 	return 0;
 }
