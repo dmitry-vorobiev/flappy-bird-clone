@@ -4,7 +4,9 @@
 
 VertexArray::VertexArray()
 	:m_rendererID(0)
-{}
+{
+	DEBUG(glGenVertexArrays(1, &m_rendererID));
+}
 
 VertexArray::~VertexArray()
 {
@@ -19,11 +21,6 @@ void VertexArray::bind() const
 void VertexArray::unbind() const
 {
 	DEBUG(glBindVertexArray(0));
-}
-
-void VertexArray::init()
-{
-	DEBUG(glGenVertexArrays(1, &m_rendererID));
 }
 
 void VertexArray::addBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout)

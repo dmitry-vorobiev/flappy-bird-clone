@@ -12,7 +12,7 @@ private:
 	Level m_level;
 
 public:
-	Game(int width, int height);
+	Game(GLFWwindow* window, int width, int height);
 	~Game();
 
 	void run();
