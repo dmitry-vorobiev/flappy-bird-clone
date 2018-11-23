@@ -2,7 +2,14 @@
 
 layout(location = 0) out vec4 out_color;
 
+in DATA
+{
+	vec2 texCoords;
+} fs_in;
+
+uniform sampler2D tex;
+
 void main()
 {
-	out_color = vec4(0.2, 0.3, 0.8, 1.0);
+	out_color = texture(tex, fs_in.texCoords);
 }

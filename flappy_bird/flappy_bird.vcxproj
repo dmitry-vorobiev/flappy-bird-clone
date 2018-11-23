@@ -159,6 +159,9 @@
     <None Include="res\shaders\bg.frag.shader" />
     <None Include="res\shaders\bg.vert.shader" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\images\bg.jpeg" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

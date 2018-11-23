@@ -3,9 +3,15 @@
 layout(location = 0) in vec4 in_pos;
 layout(location = 1) in vec2 in_texCoords;
 
+out DATA
+{
+	vec2 texCoords;
+} vs_out;
+
 uniform mat4 u_projMatrix;
 
 void main()
 {
 	gl_Position = u_projMatrix * in_pos;
+	vs_out.texCoords = in_texCoords;
 }

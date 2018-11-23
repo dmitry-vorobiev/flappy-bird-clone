@@ -9,9 +9,8 @@
 
 Level::Level()
 	:m_background(),
-	m_shader(
-		"res/shaders/bg.vert.shader", 
-		"res/shaders/bg.frag.shader")
+	m_shader("res/shaders/bg.vert.shader", "res/shaders/bg.frag.shader"),
+	m_texture("res/images/bg.jpeg")
 {
 	constexpr float y = 10.0f * 9.0f / 16.0f;
 
@@ -36,6 +35,9 @@ Level::Level()
 
 	IndexBuffer ib(indices, 6);
 
+	unsigned int texSlot = 0;
+	m_texture.bind(texSlot);
+
 	glm::mat4 proj_matrix = glm::ortho(-10.0f, 10.0f, -y, y, -1.0f, 1.0f);
 
 	m_shader.bind();
@@ -51,9 +53,11 @@ Level::~Level() {}
 
 void Level::render()
 {
+	m_texture.bind();
 	m_background.bind();
 	m_shader.bind();
 	DEBUG(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
-	m_background.unbind();
 	m_shader.unbind();
+	m_background.unbind();
+	m_texture.unbind();
 }

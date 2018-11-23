@@ -88,4 +88,9 @@
     <None Include="res\shaders\bg.vert.shader" />
     <None Include="res\shaders\bg.frag.shader" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\images\bg.jpeg">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

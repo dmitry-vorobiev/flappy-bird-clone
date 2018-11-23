@@ -28,7 +28,7 @@ void Texture::unbind() const
 
 void Texture::load(const std::string& path)
 {
-	stbi_set_flip_vertically_on_load(1);
+	stbi_set_flip_vertically_on_load(0);
 	m_buffer = stbi_load(path.c_str(), &m_width, &m_height, &m_BPP, 4);
 
 	DEBUG(glGenTextures(1, &m_rendererID));
