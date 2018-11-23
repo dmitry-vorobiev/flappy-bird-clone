@@ -6,7 +6,7 @@
 #include <fstream>
 #include <sstream>
 
-bool file_utils::load_to_string(const std::string& path, std::string& out)
+bool files::loadToString(const std::string& path, std::string& out)
 {
 	std::ifstream stream(path);
 
@@ -24,15 +24,15 @@ bool file_utils::load_to_string(const std::string& path, std::string& out)
 	return true;
 }
 
-unsigned int shader_utils::build(
+unsigned int shader::build(
 	const std::string& vert_src_path,
 	const std::string& frag_src_path)
 {
 	std::string vert_src;
 	std::string frag_src;
 
-	bool vert_src_ok = file_utils::load_to_string(vert_src_path, vert_src);
-	bool frag_src_ok = file_utils::load_to_string(frag_src_path, frag_src);
+	bool vert_src_ok = files::loadToString(vert_src_path, vert_src);
+	bool frag_src_ok = files::loadToString(frag_src_path, frag_src);
 
 	if (vert_src_ok && frag_src_ok)
 	{
@@ -45,7 +45,7 @@ unsigned int shader_utils::build(
 }
 
 
-unsigned int shader_utils::compile(unsigned int type, const std::string& source)
+unsigned int shader::compile(unsigned int type, const std::string& source)
 {
 	unsigned int id = glCreateShader(type);
 	const char* src = source.c_str();
@@ -75,7 +75,7 @@ unsigned int shader_utils::compile(unsigned int type, const std::string& source)
 	return id;
 }
 
-unsigned int shader_utils::link(unsigned int vert_s, unsigned int frag_s)
+unsigned int shader::link(unsigned int vert_s, unsigned int frag_s)
 {
 	unsigned int prog = glCreateProgram();
 

@@ -15,7 +15,7 @@ Shader::Shader(
 	const std::string& fragPath
 ) : m_rendererID(0)
 {
-	m_rendererID = shader_utils::build(vertPath, fragPath);
+	m_rendererID = shader::build(vertPath, fragPath);
 }
 
 Shader::~Shader()

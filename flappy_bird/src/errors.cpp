@@ -3,12 +3,12 @@
 #include <GL/glew.h>
 #include <iostream>
 
-void gl_clear_errors()
+void glClearErrors()
 {
 	while (glGetError() != GL_NO_ERROR);
 }
 
-bool gl_log_errors(const char* funcName, const char* fileName, int line)
+bool glLogErrors(const char* funcName, const char* fileName, int line)
 {
 	while (GLenum error = glGetError())
 	{

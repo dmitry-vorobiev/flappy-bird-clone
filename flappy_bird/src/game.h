@@ -15,10 +15,12 @@ public:
 	Game(GLFWwindow* window, int width, int height);
 	~Game();
 
-	void run();
+	void start();
+
 
 private:
 	void init();
+	void run();
 	void update();
 	void render();
 };

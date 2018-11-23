@@ -8,7 +8,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 
 Level::Level()
-	:m_background(), 
+	:m_background(),
 	m_shader(
 		"res/shaders/bg.vert.shader", 
 		"res/shaders/bg.frag.shader")

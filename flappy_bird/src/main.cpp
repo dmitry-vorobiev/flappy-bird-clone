@@ -54,7 +54,7 @@ int main()
 
 	{
 		Game game(window, width, height);
-		game.run();
+		game.start();
 	}
 
 	glfwDestroyWindow(window);
