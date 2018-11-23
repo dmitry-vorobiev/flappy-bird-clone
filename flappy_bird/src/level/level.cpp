@@ -10,8 +10,8 @@
 Level::Level()
 	:m_background(), 
 	m_shader(
-		"src/graphics/shaders/bg.vert.shader", 
-		"src/graphics/shaders/bg.frag.shader")
+		"res/shaders/bg.vert.shader", 
+		"res/shaders/bg.frag.shader")
 {
 	constexpr float y = 10.0f * 9.0f / 16.0f;
 
