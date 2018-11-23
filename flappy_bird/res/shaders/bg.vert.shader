@@ -9,9 +9,10 @@ out DATA
 } vs_out;
 
 uniform mat4 u_projMatrix;
+uniform mat4 u_viewMatrix;
 
 void main()
 {
-	gl_Position = u_projMatrix * in_pos;
+	gl_Position = u_projMatrix * u_viewMatrix * in_pos;
 	vs_out.texCoords = in_texCoords;
 }

@@ -1,7 +1,9 @@
 #include "game.h"
 #include "input.h"
+#include "utils.h"
 
 #include <iostream>
+#include <cstdio>
 
 Game::Game(GLFWwindow* window, int width, int height)
 	:m_width(width), m_height(height), m_active(false), m_window(window)
@@ -20,10 +22,42 @@ void Game::start()
 
 void Game::run()
 {
+	CurrentTime time;
+	uint64_t lastTime = time.nanosec();
+	uint64_t timer = time.millisec();
+
+	double delta = 0.0;
+	double ns = 1000000000 / 60.0;
+	int updates = 0;
+	int frames = 0;
+
+	char title[128];
+
 	while (m_active)
 	{
-		update();
+		uint64_t now = time.nanosec();
+		delta += (now - lastTime) / ns;
+		lastTime = now;
+
+		if (delta >= 1.0)
+		{
+			update();
+			updates++;
+			delta--;
+		}
+
 		render();
+		frames++;
+
+		if (time.millisec() - timer > 1000)
+		{
+			sprintf_s(title, "Flappy Bird | UPD: %i, FPS: %i", updates, frames);
+			glfwSetWindowTitle(m_window, title);
+
+			timer += 1000;
+			updates = 0;
+			frames = 0;
+		}
 	}
 }
 
@@ -41,6 +75,8 @@ void Game::update()
 		glfwSetWindowShouldClose(m_window, GL_TRUE);
 		m_active = false;
 	}
+
+	m_level.update();
 }
 
 void Game::render()

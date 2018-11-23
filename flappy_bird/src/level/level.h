@@ -10,10 +10,12 @@ private:
 	VertexArray m_background;
 	Shader m_shader;
 	Texture m_texture;
+	int m_xScroll, m_map;
 
 public:
 	Level();
 	~Level();
 
+	void update();
 	void render();
 };

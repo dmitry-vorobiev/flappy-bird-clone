@@ -110,3 +110,22 @@ unsigned int shader::link(unsigned int vert_s, unsigned int frag_s)
 	return prog;
 
 }
+
+uint64_t CurrentTime::millisec()
+{
+	using namespace std::chrono;
+
+	return duration_cast<milliseconds>(time()).count();
+}
+
+uint64_t CurrentTime::nanosec()
+{
+	using namespace std::chrono;
+
+	return duration_cast<nanoseconds>(time()).count();
+}
+
+Duration CurrentTime::time()
+{
+	return m_clock.now().time_since_epoch();
+}
