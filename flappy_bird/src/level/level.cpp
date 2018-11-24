@@ -8,11 +8,12 @@
 #include "glm/gtc/matrix_transform.hpp"
 
 Level::Level() :
-	m_background(),
-	m_shader("res/shaders/bg.vert.shader", "res/shaders/bg.frag.shader"),
-	m_texture("res/images/bg.jpeg"),
 	m_xScroll(0),
-	m_map(0)
+	m_map(0),
+	m_background(),
+	m_texture("res/images/bg.jpeg"),
+	m_shader("res/shaders/bg.vert.shader", "res/shaders/bg.frag.shader"),
+	m_cat()
 {
 	constexpr float y = 10.0f * 9.0f / 16.0f;
 
@@ -44,6 +45,7 @@ Level::Level() :
 
 	m_shader.bind();
 	m_shader.setUniformMat4f("u_projMatrix", projMatrix);
+	m_shader.setUniform1i("u_texture", texSlot);
 
 	m_background.unbind();
 	vb.unbind();
@@ -51,14 +53,14 @@ Level::Level() :
 	m_shader.unbind();
 }
 
-Level::~Level() {}
-
 void Level::update()
 {
 	m_xScroll--;
 
 	if (-m_xScroll % 335 == 0)
 		m_map++;
+
+	m_cat.update();
 }
 
 void Level::render()
@@ -74,10 +76,9 @@ void Level::render()
 		float xOffset = i * 10 + m_xScroll * 0.03f;
 		mat4 viewMatrix = translate(mat4(1.0f), vec3(xOffset, 0.0f, 0.0f));
 		m_shader.setUniformMat4f("u_viewMatrix", viewMatrix);
+
 		DEBUG(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 	}
-
 	m_shader.unbind();
-	m_background.unbind();
-	m_texture.unbind();
+	m_cat.render();
 }

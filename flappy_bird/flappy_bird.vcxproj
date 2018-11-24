@@ -135,6 +135,7 @@
     <ClCompile Include="src\graphics\index_buffer.cpp" />
     <ClCompile Include="src\graphics\vertex_array.cpp" />
     <ClCompile Include="src\graphics\vertex_buffer.cpp" />
+    <ClCompile Include="src\level\cat.cpp" />
     <ClCompile Include="src\level\level.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\graphics\shader.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="src\graphics\vertex_buffer.h" />
     <ClInclude Include="src\graphics\vertex_buffer_layout.h" />
     <ClInclude Include="src\input.h" />
+    <ClInclude Include="src\level\cat.h" />
     <ClInclude Include="src\level\level.h" />
     <ClInclude Include="src\graphics\shader.h" />
     <ClInclude Include="src\graphics\texture.h" />
@@ -162,9 +164,12 @@
   <ItemGroup>
     <None Include="res\shaders\bg.frag.shader" />
     <None Include="res\shaders\bg.vert.shader" />
+    <None Include="res\shaders\cat.frag.shader" />
+    <None Include="res\shaders\cat.vert.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\images\bg.jpeg" />
+    <Image Include="res\images\bird.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

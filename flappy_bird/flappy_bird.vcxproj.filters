@@ -51,6 +51,9 @@
     <ClCompile Include="src\utils\system_clock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\level\cat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game.h">
@@ -95,13 +98,21 @@
     <ClInclude Include="src\utils\system_clock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\level\cat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\bg.vert.shader" />
     <None Include="res\shaders\bg.frag.shader" />
+    <None Include="res\shaders\cat.vert.shader" />
+    <None Include="res\shaders\cat.frag.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\images\bg.jpeg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\images\bird.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

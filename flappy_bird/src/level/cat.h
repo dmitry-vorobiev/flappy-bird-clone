@@ -1,21 +1,23 @@
 #pragma once
 
-#include "../graphics/vertex_array.h"
 #include "../graphics/shader.h"
 #include "../graphics/texture.h"
-#include "cat.h"
+#include "../graphics/vertex_array.h"
 
-class Level
+#include "glm/glm.hpp"
+
+class Cat
 {
 private:
-	int m_xScroll, m_map;
-	VertexArray m_background;
+	float m_size, m_rotation, m_dy;
+	glm::vec3 m_position;
+	VertexArray m_mesh;
 	Texture m_texture;
 	Shader m_shader;
-	Cat m_cat;
 
+	
 public:
-	Level();
+	Cat();
 
 	void update();
 	void render();

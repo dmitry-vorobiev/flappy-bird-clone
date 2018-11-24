@@ -1,12 +1,12 @@
 #pragma once
 
-#include <GLFW/glfw3.h>
+#include "ext_deps.h"
 
 namespace input
 {
-	bool keys[512]{false};
+	static bool keys[512]{false};
 
-	void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
+	inline void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 	{
 		keys[key] = action != GLFW_RELEASE;
 	}

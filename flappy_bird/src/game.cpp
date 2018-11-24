@@ -5,11 +5,12 @@
 #include <iostream>
 #include <cstdio>
 
-Game::Game(GLFWwindow* window, int width, int height)
-	:m_width(width), m_height(height), m_active(false), m_window(window)
-{}
-
-Game::~Game() 
+Game::Game(GLFWwindow* window, int width, int height) :
+	m_width(width), 
+	m_height(height), 
+	m_active(false), 
+	m_window(window),
+	m_level()
 {
 }
 

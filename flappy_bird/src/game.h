@@ -13,10 +13,8 @@ private:
 
 public:
 	Game(GLFWwindow* window, int width, int height);
-	~Game();
 
 	void start();
-
 
 private:
 	void init();
