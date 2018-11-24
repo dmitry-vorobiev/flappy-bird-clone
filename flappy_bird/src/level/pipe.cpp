@@ -12,6 +12,12 @@ float Pipe::s_width = 1.5f;
 float Pipe::s_height = 8.0f;
 
 
+VertexArray* Pipe::s_mesh(nullptr);
+
+Texture* Pipe::s_texture(nullptr);
+
+Shader* Pipe::s_shader(nullptr);
+
 Pipe::Pipe(float x, float y) :
 	m_position(x, y, 0.0f),
 	m_modelMatrix(glm::translate(glm::mat4(1.0f), m_position))
@@ -20,23 +26,17 @@ Pipe::Pipe(float x, float y) :
 
 VertexArray& Pipe::mesh()
 {
-	static VertexArray s_mesh;
-	return s_mesh;
+	return *s_mesh;
 }
 
 Texture& Pipe::texture()
 {
-	static Texture s_texture("res/images/pipe.png");
-	return s_texture;
+	return *s_texture;
 }
 
 Shader& Pipe::shader()
 {
-	static Shader s_shader(
-		"res/shaders/pipe.vert.shader",
-		"res/shaders/pipe.frag.shader"
-	);
-	return s_shader;
+	return *s_shader;
 }
 
 void Pipe::init()
@@ -55,37 +55,43 @@ void Pipe::init()
 		2, 3, 0
 	};
 
-	VertexArray& s_mesh = mesh();
-	Texture& s_texture = texture();
-	Shader& s_shader = shader();
+	s_mesh = new VertexArray();
+	s_texture = new Texture("res/images/pipe.png");
+	s_shader = new Shader(
+		"res/shaders/pipe.vert.shader",
+		"res/shaders/pipe.frag.shader"
+	);
 
 	VertexBuffer vb(&vertices, 4 * 5 * sizeof(float));
 	VertexBufferLayout layout;
 	layout.push<float>(3);
 	layout.push<float>(2);
 
-	s_mesh.addBuffer(vb, layout);
+	VertexArray& mesh = *s_mesh;
+	mesh.addBuffer(vb, layout);
 
 	IndexBuffer ib(indices, 6);
 
 	unsigned int texSlot = 0;
-	s_texture.bind(texSlot);
+	Texture& texture = *s_texture;
+	texture.bind(texSlot);
 
 	glm::mat4 projMatrix = glm::ortho(-10.0f, 10.0f, -10.0f * 9.0f / 16.0f, 10.0f * 9.0f / 16.0f, -1.0f, 1.0f);
 
-	s_shader.bind();
-	s_shader.setUniformMat4f("u_projMatrix", projMatrix);
-	s_shader.setUniform1i("u_texture", texSlot);
+	Shader& shader = *s_shader;
+	shader.bind();
+	shader.setUniformMat4f("u_projMatrix", projMatrix);
+	shader.setUniform1i("u_texture", texSlot);
 
-	s_mesh.unbind();
+	mesh.unbind();
 	vb.unbind();
 	ib.unbind();
-	s_shader.unbind();
+	shader.unbind();
 }
 
 void Pipe::destroy()
 {
-	mesh().~VertexArray();
-	texture().~Texture();
-	shader().~Shader();
+	delete s_mesh;
+	delete s_texture;
+	delete s_shader;
 }

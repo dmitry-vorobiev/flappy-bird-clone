@@ -10,6 +10,9 @@ class Pipe
 {
 private:
 	static float s_width, s_height;
+	static VertexArray* s_mesh;
+	static Texture* s_texture;
+	static Shader* s_shader;
 
 	glm::vec3 m_position;
 	glm::mat4 m_modelMatrix;
