@@ -11,6 +11,8 @@
 class Level
 {
 private:
+	static float s_offset;
+
 	int m_xScroll, m_map;
 	VertexArray m_background;
 	Texture m_texture;

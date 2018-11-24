@@ -18,7 +18,7 @@ Cat::Cat() :
 {
 	const float x = m_size / 2.0f;
 	const float y = m_size / 2.0f;
-	const float z = 0.1f;
+	const float z = 0.2f;
 
 	float vertices[] {
 		-3.86f * x, -y,  z,  0.0f, 1.0f,

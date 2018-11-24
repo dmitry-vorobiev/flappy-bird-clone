@@ -5,11 +5,12 @@
 #include "../graphics/vertex_buffer.h"
 #include "../graphics/vertex_buffer_layout.h"
 
-#include <ctime>
 #include <cstdlib>
 
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+
+float Level::s_offset(7.0f);
 
 Level::Level() :
 	m_xScroll(0),
@@ -104,8 +105,11 @@ void Level::createPipes()
 
 	for (int i = 0; i < 5 * 2; i += 2)
 	{
-		Pipe top(index * 3.0f, 4.0f * std::rand() / RAND_MAX);
-		Pipe bottom(top.x(), top.y() - 10.0f);
+		float x = s_offset + index * 3.0f;
+		float y = 4.0f * std::rand() / RAND_MAX;
+
+		Pipe top(x, y);
+		Pipe bottom(x, y - 10.0f);
 
 		m_pipes.push_back(top);
 		m_pipes.push_back(bottom);

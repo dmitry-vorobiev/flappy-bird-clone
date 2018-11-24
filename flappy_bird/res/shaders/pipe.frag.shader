@@ -12,11 +12,10 @@ uniform sampler2D u_texture;
 
 void main()
 {
+	float x = fs_in.texCoords.x;
+	float y = u_top == 1 ? 1.0f - fs_in.texCoords.y : fs_in.texCoords.y;
 
-	if (u_top == 1)
-		out_color = texture(u_texture, vec2(fs_in.texCoords.x, 1.0f - fs_in.texCoords.y));
-	else
-		out_color = texture(u_texture, fs_in.texCoords);
+	out_color = texture(u_texture, vec2(x, y));
 
 	if (out_color.w < 1.0f)
 		discard;
