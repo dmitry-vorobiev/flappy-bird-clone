@@ -24,14 +24,9 @@ void Game::run()
 {
 	utils::SystemClock time;
 	uint64_t lastTime = time.nanosec();
-	uint64_t timer = time.millisec();
 
 	double delta = 0.0;
 	double ns = 1000000000 / 60.0;
-	int updates = 0;
-	int frames = 0;
-
-	char title[128];
 
 	while (m_active)
 	{
@@ -42,22 +37,9 @@ void Game::run()
 		if (delta >= 1.0)
 		{
 			update();
-			updates++;
 			delta--;
 		}
-
 		render();
-		frames++;
-
-		if (time.millisec() - timer > 1000)
-		{
-			sprintf_s(title, "Flappy Bird | UPD: %i, FPS: %i", updates, frames);
-			glfwSetWindowTitle(m_window, title);
-
-			timer += 1000;
-			updates = 0;
-			frames = 0;
-		}
 	}
 }
 
