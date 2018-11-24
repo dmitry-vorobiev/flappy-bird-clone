@@ -9,7 +9,7 @@
 class Cat
 {
 private:
-	float m_size, m_rotation, m_dy;
+	float m_size, m_angle, m_dy;
 	glm::vec3 m_position;
 	VertexArray m_mesh;
 	Texture m_texture;
@@ -21,4 +21,7 @@ public:
 
 	void update();
 	void render();
+
+private:
+	void fall();
 };

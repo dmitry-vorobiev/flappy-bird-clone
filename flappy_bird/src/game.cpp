@@ -46,14 +46,14 @@ void Game::run()
 
 void Game::init()
 {
-	glfwSetKeyCallback(m_window, input::key_callback);
+	glfwSetKeyCallback(m_window, input::callback);
 }
 
 void Game::update()
 {
 	glfwPollEvents();
 	
-	if (input::is_key_pressed(GLFW_KEY_ESCAPE))
+	if (input::isKeyDown(GLFW_KEY_ESCAPE))
 	{
 		glfwSetWindowShouldClose(m_window, GL_TRUE);
 		m_active = false;

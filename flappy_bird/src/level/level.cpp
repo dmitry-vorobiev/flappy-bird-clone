@@ -79,6 +79,6 @@ void Level::render()
 
 		DEBUG(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 	}
-	m_shader.unbind();
+
 	m_cat.render();
 }
