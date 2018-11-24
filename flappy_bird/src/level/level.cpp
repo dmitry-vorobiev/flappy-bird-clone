@@ -1,4 +1,5 @@
 #include "level.h"
+#include "pipe.h"
 #include "../errors.h"
 #include "../graphics/index_buffer.h"
 #include "../graphics/vertex_buffer.h"
@@ -13,7 +14,8 @@ Level::Level() :
 	m_background(),
 	m_texture("res/images/bg.jpeg"),
 	m_shader("res/shaders/bg.vert.shader", "res/shaders/bg.frag.shader"),
-	m_cat()
+	m_cat(),
+	m_pipes()
 {
 	constexpr float y = 10.0f * 9.0f / 16.0f;
 
@@ -51,6 +53,13 @@ Level::Level() :
 	vb.unbind();
 	ib.unbind();
 	m_shader.unbind();
+
+	createPipes();
+}
+
+Level::~Level()
+{
+	Pipe::destroy();
 }
 
 void Level::update()
@@ -81,4 +90,51 @@ void Level::render()
 	}
 
 	m_cat.render();
+	renderPipes();
+}
+
+void Level::createPipes()
+{
+	Pipe::init();
+
+	float index = 0.0f;
+
+	for (int i = 0; i < 5 * 2; i += 2)
+	{
+		Pipe top(index * 3.0f, 4.0f);
+		Pipe bottom(top.x(), top.y() - 10.0f);
+
+		m_pipes.push_back(top);
+		m_pipes.push_back(bottom);
+
+		index += 2;
+	}
+}
+
+void Level::updatePipes()
+{
+	for (int i = 0; i < 5 * 2; i++)
+	{
+
+	}
+}
+
+void Level::renderPipes()
+{
+	using namespace glm;
+
+	Shader& shader = Pipe::shader();
+	shader.bind();
+
+	mat4 transform = translate(mat4(1.0f), vec3(m_xScroll * 0.03f, 0.0f, 0.0f));
+	shader.setUniformMat4f("u_viewMatrix", transform);
+
+	Pipe::texture().bind();
+	Pipe::mesh().bind();
+
+	for (int i = 0; i < 5 * 2; i++)
+	{
+		shader.setUniformMat4f("u_modelMatrix", m_pipes[i].modelMatrix());
+		DEBUG(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+	}
 }

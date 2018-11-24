@@ -137,6 +137,7 @@
     <ClCompile Include="src\graphics\vertex_buffer.cpp" />
     <ClCompile Include="src\level\cat.cpp" />
     <ClCompile Include="src\level\level.cpp" />
+    <ClCompile Include="src\level\pipe.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\graphics\shader.cpp" />
     <ClCompile Include="src\graphics\texture.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="src\level\level.h" />
     <ClInclude Include="src\graphics\shader.h" />
     <ClInclude Include="src\graphics\texture.h" />
+    <ClInclude Include="src\level\pipe.h" />
     <ClInclude Include="src\utils\files.h" />
     <ClInclude Include="src\utils\shaders.h" />
     <ClInclude Include="src\utils\system_clock.h" />
@@ -166,10 +168,13 @@
     <None Include="res\shaders\bg.vert.shader" />
     <None Include="res\shaders\cat.frag.shader" />
     <None Include="res\shaders\cat.vert.shader" />
+    <None Include="res\shaders\pipe.frag.shader" />
+    <None Include="res\shaders\pipe.vert.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\images\bg.jpeg" />
-    <Image Include="res\images\bird.png" />
+    <Image Include="res\images\cat_rainbow.png" />
+    <Image Include="res\images\pipe.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
