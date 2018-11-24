@@ -6,18 +6,22 @@
 
 bool utils::files::loadToString(const std::string& path, std::string& out)
 {
-	std::ifstream stream(path);
+	std::ifstream file(path, std::ios::in);
 
-	if (!stream.is_open())
+	if (!file.is_open())
 	{
 		std::cout << "[I/O ERROR] Unable to read from " << path << std::endl;
 		return false;
 	}
 
-	std::stringstream ss;
-	ss << stream.rdbuf();
-	stream.close();
-	out = ss.str();
+	std::string line;
 
+	while (!file.eof())
+	{
+		getline(file, line);
+		out.append(line + "\n");
+	}
+
+	file.close();
 	return true;
 }
