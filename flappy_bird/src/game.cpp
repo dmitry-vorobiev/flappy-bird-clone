@@ -1,6 +1,6 @@
 #include "game.h"
 #include "input.h"
-#include "utils.h"
+#include "utils/system_clock.h"
 
 #include <iostream>
 #include <cstdio>
@@ -22,7 +22,7 @@ void Game::start()
 
 void Game::run()
 {
-	CurrentTime time;
+	utils::SystemClock time;
 	uint64_t lastTime = time.nanosec();
 	uint64_t timer = time.millisec();
 

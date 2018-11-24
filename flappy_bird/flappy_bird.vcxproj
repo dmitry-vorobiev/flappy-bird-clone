@@ -139,7 +139,9 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\graphics\shader.cpp" />
     <ClCompile Include="src\graphics\texture.cpp" />
-    <ClCompile Include="src\utils.cpp" />
+    <ClCompile Include="src\utils\files.cpp" />
+    <ClCompile Include="src\utils\shaders.cpp" />
+    <ClCompile Include="src\utils\system_clock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\errors.h" />
@@ -153,7 +155,9 @@
     <ClInclude Include="src\level\level.h" />
     <ClInclude Include="src\graphics\shader.h" />
     <ClInclude Include="src\graphics\texture.h" />
-    <ClInclude Include="src\utils.h" />
+    <ClInclude Include="src\utils\files.h" />
+    <ClInclude Include="src\utils\shaders.h" />
+    <ClInclude Include="src\utils\system_clock.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\bg.frag.shader" />

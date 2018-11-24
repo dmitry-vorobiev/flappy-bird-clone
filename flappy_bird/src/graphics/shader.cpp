@@ -3,7 +3,7 @@
 #include "shader.h"
 #include "../ext_deps.h"
 #include "../errors.h"
-#include "../utils.h"
+#include "../utils/shaders.h"
 
 #include <iostream>
 #include <fstream>
@@ -15,7 +15,7 @@ Shader::Shader(
 	const std::string& fragPath
 ) : m_rendererID(0)
 {
-	m_rendererID = shader::build(vertPath, fragPath);
+	m_rendererID = utils::shaders::build(vertPath, fragPath);
 }
 
 Shader::~Shader()
