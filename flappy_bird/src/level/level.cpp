@@ -5,6 +5,9 @@
 #include "../graphics/vertex_buffer.h"
 #include "../graphics/vertex_buffer_layout.h"
 
+#include <ctime>
+#include <cstdlib>
+
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
@@ -89,8 +92,8 @@ void Level::render()
 		DEBUG(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 	}
 
-	m_cat.render();
 	renderPipes();
+	m_cat.render();
 }
 
 void Level::createPipes()
@@ -101,7 +104,7 @@ void Level::createPipes()
 
 	for (int i = 0; i < 5 * 2; i += 2)
 	{
-		Pipe top(index * 3.0f, 4.0f);
+		Pipe top(index * 3.0f, 4.0f * std::rand() / RAND_MAX);
 		Pipe bottom(top.x(), top.y() - 10.0f);
 
 		m_pipes.push_back(top);
@@ -135,6 +138,8 @@ void Level::renderPipes()
 	for (int i = 0; i < 5 * 2; i++)
 	{
 		shader.setUniformMat4f("u_modelMatrix", m_pipes[i].modelMatrix());
+		shader.setUniform1i("u_top", i % 2 == 0 ? 1 : 0);
+
 		DEBUG(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 	}
 }
