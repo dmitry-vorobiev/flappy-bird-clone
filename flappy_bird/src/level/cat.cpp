@@ -58,14 +58,16 @@ Cat::Cat() :
 
 void Cat::update()
 {
+	float delta = 0.06f;
+
 	if (input::is_key_pressed(GLFW_KEY_UP))
-		m_position.y++;
+		m_position.y += delta;
 	if (input::is_key_pressed(GLFW_KEY_DOWN))
-		m_position.y--;
+		m_position.y -= delta;
 	if (input::is_key_pressed(GLFW_KEY_LEFT))
-		m_position.x--;
+		m_position.x -= delta;
 	if (input::is_key_pressed(GLFW_KEY_RIGHT))
-		m_position.x++;
+		m_position.x += delta;
 }
 
 void Cat::render()
