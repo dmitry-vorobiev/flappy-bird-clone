@@ -11,9 +11,11 @@
 class Level
 {
 private:
-	static float s_offset;
+	static const float PIPE_INIT_OFFSET;
+	static const float PIPE_GAP;
 
 	int m_xScroll, m_map;
+	unsigned int m_pipe_index;
 	VertexArray m_background;
 	Texture m_texture;
 	Shader m_shader;

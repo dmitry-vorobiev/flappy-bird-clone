@@ -10,11 +10,14 @@
 
 #include "glm/glm.hpp"
 
-float Level::s_offset(7.0f);
+const float Level::PIPE_INIT_OFFSET = 5.0f;
+
+const float Level::PIPE_GAP = 11.5f;
 
 Level::Level() :
 	m_xScroll(0),
 	m_map(0),
+	m_pipe_index(0),
 	m_background(),
 	m_texture("res/images/bg.jpeg"),
 	m_shader("res/shaders/bg.vert.shader", "res/shaders/bg.frag.shader"),
@@ -71,21 +74,24 @@ void Level::update()
 	if (-m_xScroll % 335 == 0)
 		m_map++;
 
+	if (-m_xScroll > 250 && -m_xScroll % 120 == 0)
+		updatePipes();
+
 	m_cat.update();
 }
 
 void Level::render()
 {
 	m_texture.bind();
-	m_background.bind();
 	m_shader.bind();
+	m_background.bind();
 
 	for (auto i = m_map; i < m_map + 4; i++)
 	{
 		using namespace glm;
 
-		float xOffset = i * 10 + m_xScroll * 0.03f;
-		mat4 viewMatrix = translate(mat4(1.0f), vec3(xOffset, 0.0f, 0.0f));
+		float x = i * 10 + m_xScroll * 0.03f;
+		mat4 viewMatrix = translate(mat4(1.0f), vec3(x, 0.0f, 0.0f));
 		m_shader.setUniformMat4f("u_viewMatrix", viewMatrix);
 
 		DEBUG(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
@@ -99,29 +105,27 @@ void Level::createPipes()
 {
 	Pipe::init();
 
-	float index = 0.0f;
-
-	for (int i = 0; i < 5 * 2; i += 2)
+	for (; m_pipe_index < 5 * 2; m_pipe_index += 2)
 	{
-		float x = s_offset + index * 3.0f;
+		float x = PIPE_INIT_OFFSET + m_pipe_index * 3.0f;
 		float y = 4.0f * std::rand() / RAND_MAX;
 
 		Pipe top(x, y);
-		Pipe bottom(x, y - 10.0f);
+		Pipe bottom(x, y - PIPE_GAP);
 
+		m_pipes.reserve(10);
 		m_pipes.push_back(top);
 		m_pipes.push_back(bottom);
-
-		index += 2;
 	}
 }
 
 void Level::updatePipes()
 {
-	for (int i = 0; i < 5 * 2; i++)
-	{
+	float x = PIPE_INIT_OFFSET + m_pipe_index * 3.0f;
+	float y = 4.0f * std::rand() / RAND_MAX;
 
-	}
+	m_pipes[m_pipe_index++ % 10] = Pipe(x, y);
+	m_pipes[m_pipe_index++ % 10] = Pipe(x, y - PIPE_GAP);
 }
 
 void Level::renderPipes()
@@ -131,7 +135,7 @@ void Level::renderPipes()
 	Shader& shader = Pipe::shader();
 	shader.bind();
 
-	mat4 transform = translate(mat4(1.0f), vec3(m_xScroll * 0.03f, 0.0f, 0.0f));
+	mat4 transform = translate(mat4(1.0f), vec3(m_xScroll * 0.05f, 0.0f, 0.0f));
 	shader.setUniformMat4f("u_viewMatrix", transform);
 
 	Pipe::texture().bind();
