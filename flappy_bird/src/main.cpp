@@ -19,7 +19,7 @@ int main()
 	int width = 1280;
 	int height = 720;
 
-	GLFWwindow* window = glfwCreateWindow(width, height, "Flappy bird", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(width, height, "Flappy cat", nullptr, nullptr);
 	if (window == nullptr)
 	{
 		std::cout << "Unable to create GLFW window" << std::endl;

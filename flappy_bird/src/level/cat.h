@@ -9,12 +9,13 @@
 class Cat
 {
 private:
-	float m_size, m_angle, m_dy;
+	static const float SIZE;
+
+	float m_angle, m_dy;
 	glm::vec3 m_position;
 	VertexArray m_mesh;
 	Texture m_texture;
 	Shader m_shader;
-
 	
 public:
 	Cat();

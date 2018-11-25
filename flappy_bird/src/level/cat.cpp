@@ -7,24 +7,23 @@
 #include "../graphics/vertex_buffer_layout.h"
 
 
+const float Cat::SIZE = 0.5f;
+
 Cat::Cat() :
-	m_size(1.0f),
-	m_angle(0),
-	m_dy(0),
-	m_position(0),
+	m_angle(0.0f),
+	m_dy(0.0f),
+	m_position(0.0f, 0.0f, 0.0f),
 	m_mesh(),
-	m_texture("res/images/cat_rainbow.png"),
+	m_texture("res/images/cat.png"),
 	m_shader("res/shaders/cat.vert.shader", "res/shaders/cat.frag.shader")
 {
-	const float x = m_size / 2.0f;
-	const float y = m_size / 2.0f;
 	const float z = 0.2f;
 
 	float vertices[] {
-		-3.86f * x, -y,  z,  0.0f, 1.0f,
-		-3.86f * x,  y,  z,  0.0f, 0.0f,
-				 x,  y,  z,  1.0f, 0.0f,
-				 x, -y,  z,  1.0f, 1.0f
+		-2.43f * SIZE, -SIZE,  z,  0.0f, 1.0f,
+		-2.43f * SIZE,  SIZE,  z,  0.0f, 0.0f,
+				 SIZE,  SIZE,  z,  1.0f, 0.0f,
+				 SIZE, -SIZE,  z,  1.0f, 1.0f
 	};
 
 	unsigned int indices[] {
