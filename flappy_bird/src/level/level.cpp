@@ -1,6 +1,7 @@
 #include "level.h"
 #include "pipe.h"
 #include "../errors.h"
+#include "../global.h"
 #include "../graphics/index_buffer.h"
 #include "../graphics/vertex_buffer.h"
 #include "../graphics/vertex_buffer_layout.h"
@@ -8,7 +9,6 @@
 #include <cstdlib>
 
 #include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
 
 float Level::s_offset(7.0f);
 
@@ -47,10 +47,8 @@ Level::Level() :
 	unsigned int texSlot = 0;
 	m_texture.bind(texSlot);
 
-	glm::mat4 projMatrix = glm::ortho(-10.0f, 10.0f, -y, y, -1.0f, 1.0f);
-
 	m_shader.bind();
-	m_shader.setUniformMat4f("u_projMatrix", projMatrix);
+	m_shader.setUniformMat4f("u_projMatrix", PROJECTION_MATRIX);
 	m_shader.setUniform1i("u_texture", texSlot);
 
 	m_background.unbind();

@@ -1,11 +1,11 @@
 #include "cat.h"
 #include "../errors.h"
+#include "../global.h"
 #include "../input.h"
 #include "../graphics/index_buffer.h"
 #include "../graphics/vertex_buffer.h"
 #include "../graphics/vertex_buffer_layout.h"
 
-#include "glm/gtc/matrix_transform.hpp"
 
 Cat::Cat() :
 	m_size(1.0f),
@@ -44,10 +44,8 @@ Cat::Cat() :
 	unsigned int texSlot = 0;
 	m_texture.bind(texSlot);
 
-	glm::mat4 projMatrix = glm::ortho(-10.0f, 10.0f, -10.0f * 9.0f / 16.0f, 10.0f * 9.0f / 16.0f, -1.0f, 1.0f);
-
 	m_shader.bind();
-	m_shader.setUniformMat4f("u_projMatrix", projMatrix);
+	m_shader.setUniformMat4f("u_projMatrix", PROJECTION_MATRIX);
 	m_shader.setUniform1i("u_texture", texSlot);
 
 	m_mesh.unbind();

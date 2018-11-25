@@ -149,6 +149,7 @@
     <ClInclude Include="src\errors.h" />
     <ClInclude Include="src\ext_deps.h" />
     <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\global.h" />
     <ClInclude Include="src\graphics\index_buffer.h" />
     <ClInclude Include="src\graphics\vertex_array.h" />
     <ClInclude Include="src\graphics\vertex_buffer.h" />

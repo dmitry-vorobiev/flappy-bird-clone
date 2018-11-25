@@ -1,15 +1,14 @@
 #include "pipe.h"
 #include "../errors.h"
+#include "../global.h"
 #include "../graphics/index_buffer.h"
 #include "../graphics/vertex_buffer.h"
 #include "../graphics/vertex_buffer_layout.h"
 
-#include "glm/gtc/matrix_transform.hpp"
 
+const float Pipe::WIDTH = 1.5f;
 
-float Pipe::s_width = 1.5f;
-
-float Pipe::s_height = 8.0f;
+const float Pipe::HEIGHT = 8.0f;
 
 
 VertexArray* Pipe::s_mesh(nullptr);
@@ -24,30 +23,15 @@ Pipe::Pipe(float x, float y) :
 {
 }
 
-VertexArray& Pipe::mesh()
-{
-	return *s_mesh;
-}
-
-Texture& Pipe::texture()
-{
-	return *s_texture;
-}
-
-Shader& Pipe::shader()
-{
-	return *s_shader;
-}
-
 void Pipe::init()
 {
 	const float z = 0.1f;
 
 	float vertices[]{
-		   0.0f,     0.0f,  z,  0.0f, 1.0f,
-		   0.0f, s_height,  z,  0.0f, 0.0f,
-		s_width, s_height,  z,  1.0f, 0.0f,
-		s_width,     0.0f,  z,  1.0f, 1.0f
+		 0.0f,   0.0f, z, 0.0f, 1.0f,
+		 0.0f, HEIGHT, z, 0.0f, 0.0f,
+		WIDTH, HEIGHT, z, 1.0f, 0.0f,
+		WIDTH,   0.0f, z, 1.0f, 1.0f
 	};
 
 	unsigned int indices[]{
@@ -76,11 +60,9 @@ void Pipe::init()
 	Texture& texture = *s_texture;
 	texture.bind(texSlot);
 
-	glm::mat4 projMatrix = glm::ortho(-10.0f, 10.0f, -10.0f * 9.0f / 16.0f, 10.0f * 9.0f / 16.0f, -1.0f, 1.0f);
-
 	Shader& shader = *s_shader;
 	shader.bind();
-	shader.setUniformMat4f("u_projMatrix", projMatrix);
+	shader.setUniformMat4f("u_projMatrix", PROJECTION_MATRIX);
 	shader.setUniform1i("u_texture", texSlot);
 
 	mesh.unbind();
