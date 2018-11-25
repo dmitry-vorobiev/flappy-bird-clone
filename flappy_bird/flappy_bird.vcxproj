@@ -160,6 +160,7 @@
     <ClInclude Include="src\graphics\shader.h" />
     <ClInclude Include="src\graphics\texture.h" />
     <ClInclude Include="src\level\pipe.h" />
+    <ClInclude Include="src\utils\arrays.h" />
     <ClInclude Include="src\utils\files.h" />
     <ClInclude Include="src\utils\shaders.h" />
     <ClInclude Include="src\utils\system_clock.h" />

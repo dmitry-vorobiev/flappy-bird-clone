@@ -5,6 +5,7 @@
 #include "../graphics/index_buffer.h"
 #include "../graphics/vertex_buffer.h"
 #include "../graphics/vertex_buffer_layout.h"
+#include "../utils/arrays.h"
 
 #include <cstdlib>
 
@@ -22,7 +23,7 @@ Level::Level() :
 	m_texture("res/images/bg.jpeg"),
 	m_shader("res/shaders/bg.vert.shader", "res/shaders/bg.frag.shader"),
 	m_cat(),
-	m_pipes()
+	m_pipes(utils::make_array_n<10>(Pipe(0.0f, 0.0f)))
 {
 	constexpr float y = 10.0f * 9.0f / 16.0f;
 
@@ -113,9 +114,8 @@ void Level::createPipes()
 		Pipe top(x, y);
 		Pipe bottom(x, y - PIPE_GAP);
 
-		m_pipes.reserve(10);
-		m_pipes.push_back(top);
-		m_pipes.push_back(bottom);
+		m_pipes[m_pipe_index] = Pipe(x, y);
+		m_pipes[m_pipe_index + 1] = Pipe(x, y - PIPE_GAP);
 	}
 }
 

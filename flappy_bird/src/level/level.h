@@ -6,6 +6,7 @@
 #include "../graphics/shader.h"
 #include "../graphics/texture.h"
 
+#include <array>
 #include <vector>
 
 class Level
@@ -20,7 +21,7 @@ private:
 	Texture m_texture;
 	Shader m_shader;
 	Cat m_cat;
-	std::vector<Pipe> m_pipes;
+	std::array<Pipe, 10> m_pipes;
 
 public:
 	Level();
