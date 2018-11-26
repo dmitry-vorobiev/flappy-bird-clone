@@ -13,7 +13,7 @@ Cat::Cat() :
 	m_angle(0.0f),
 	m_dy(0.0f),
 	m_position(0.0f, 0.0f, 0.0f),
-	m_mesh(),
+	m_mesh(true, 6),
 	m_texture("res/images/cat.png"),
 	m_shader("res/shaders/cat.vert.shader", "res/shaders/cat.frag.shader")
 {
@@ -84,6 +84,5 @@ void Cat::render()
 	transform = translate(transform, m_position);
 	transform = rotate(transform, radians(m_angle), vec3(0.0f, 0.0f, 1.0f));
 	m_shader.setUniformMat4f("u_modelMatrix", transform);
-
-	DEBUG(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+	m_mesh.draw();
 }

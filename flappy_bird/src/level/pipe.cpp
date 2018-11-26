@@ -36,7 +36,7 @@ void Pipe::init()
 	};
 
 	s_assets = new PipeAssets{
-		VertexArray(),
+		VertexArray(true, 6),
 		Texture("res/images/pipe.png"),
 		Shader("res/shaders/pipe.vert.shader", "res/shaders/pipe.frag.shader")
 	};

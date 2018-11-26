@@ -2,8 +2,10 @@
 #include "../ext_deps.h"
 #include "../errors.h"
 
-VertexArray::VertexArray()
-	:m_rendererID(0)
+VertexArray::VertexArray(bool drawElements, unsigned int count)	:
+	m_drawElements(drawElements),
+	m_rendererID(0),
+	m_count(count)
 {
 	DEBUG(glGenVertexArrays(1, &m_rendererID));
 }
@@ -21,6 +23,14 @@ void VertexArray::bind() const
 void VertexArray::unbind() const
 {
 	DEBUG(glBindVertexArray(0));
+}
+
+void VertexArray::draw() const
+{
+	if (m_drawElements)
+		DEBUG(glDrawElements(GL_TRIANGLES, m_count, GL_UNSIGNED_INT, nullptr));
+	else
+		DEBUG(glDrawArrays(GL_TRIANGLES, 0, m_count));
 }
 
 void VertexArray::addBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout)

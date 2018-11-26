@@ -12,14 +12,14 @@
 
 const float Level::PIPE_INIT_OFFSET = 5.0f;
 
-const float Level::PIPE_GAP = 11.5f;
+const float Level::PIPE_GAP = 12.0f;
 
 Level::Level() :
 	m_catAlive(true),
 	m_xScroll(0),
 	m_map(0),
 	m_pipe_index(0),
-	m_background(),
+	m_background(true, 6),
 	m_texture("res/images/bg.jpeg"),
 	m_shader("res/shaders/bg.vert.shader", "res/shaders/bg.frag.shader"),
 	m_cat(),
@@ -102,9 +102,9 @@ void Level::render()
 
 		float x = i * 10 + m_xScroll * 0.03f;
 		mat4 viewMatrix = translate(mat4(1.0f), vec3(x, 0.0f, 0.0f));
-		m_shader.setUniformMat4f("u_viewMatrix", viewMatrix);
 
-		DEBUG(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+		m_shader.setUniformMat4f("u_viewMatrix", viewMatrix);
+		m_background.draw();
 	}
 
 	renderPipes();
@@ -141,14 +141,15 @@ void Level::renderPipes()
 	shader.setUniformMat4f("u_viewMatrix", transform);
 
 	Pipe::texture().bind();
-	Pipe::mesh().bind();
+
+	VertexArray& mesh = Pipe::mesh();
+	mesh.bind();
 
 	for (int i = 0; i < 5 * 2; i++)
 	{
 		shader.setUniformMat4f("u_modelMatrix", m_pipes[i].modelMatrix());
 		shader.setUniform1i("u_top", i % 2 == 0 ? 1 : 0);
-
-		DEBUG(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+		mesh.draw();
 	}
 }
 

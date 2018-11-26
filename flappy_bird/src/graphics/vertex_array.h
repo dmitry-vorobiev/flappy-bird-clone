@@ -6,13 +6,16 @@
 class VertexArray
 {
 private:
-	unsigned int m_rendererID;
+	bool m_drawElements;
+	unsigned int m_rendererID, m_count;
 public:
-	VertexArray();
+	VertexArray(bool drawElements, unsigned int count);
 	~VertexArray();
 
 	void bind() const;
 	void unbind() const;
+
+	void draw() const;
 
 	void addBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout);
 };
