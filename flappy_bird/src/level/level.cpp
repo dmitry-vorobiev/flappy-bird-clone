@@ -20,7 +20,7 @@ Level::Level() :
 	m_map(0),
 	m_pipe_index(0),
 	m_background(true, 6),
-	m_texture("res/images/bg.jpeg"),
+	m_texture("res/images/background.png"),
 	m_shader("res/shaders/bg.vert.shader", "res/shaders/bg.frag.shader"),
 	m_cat(),
 	m_pipes{ Pipe(0.0f, 0.0f), m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0] }
