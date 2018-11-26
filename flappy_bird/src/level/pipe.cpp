@@ -5,21 +5,17 @@
 #include "../graphics/vertex_buffer.h"
 #include "../graphics/vertex_buffer_layout.h"
 
+const glm::mat4 IDENTITY(1.0f);
 
 const float Pipe::WIDTH = 1.5f;
 
 const float Pipe::HEIGHT = 8.0f;
 
-
-VertexArray* Pipe::s_mesh(nullptr);
-
-Texture* Pipe::s_texture(nullptr);
-
-Shader* Pipe::s_shader(nullptr);
+PipeAssets* Pipe::s_assets(nullptr);
 
 Pipe::Pipe(float x, float y) :
 	m_position(x, y, 0.0f),
-	m_modelMatrix(glm::translate(glm::mat4(1.0f), m_position))
+	m_modelMatrix(glm::translate(IDENTITY, m_position))
 {
 }
 
@@ -39,28 +35,27 @@ void Pipe::init()
 		2, 3, 0
 	};
 
-	s_mesh = new VertexArray();
-	s_texture = new Texture("res/images/pipe.png");
-	s_shader = new Shader(
-		"res/shaders/pipe.vert.shader",
-		"res/shaders/pipe.frag.shader"
-	);
+	s_assets = new PipeAssets{
+		VertexArray(),
+		Texture("res/images/pipe.png"),
+		Shader("res/shaders/pipe.vert.shader", "res/shaders/pipe.frag.shader")
+	};
 
 	VertexBuffer vb(&vertices, 4 * 5 * sizeof(float));
 	VertexBufferLayout layout;
 	layout.push<float>(3);
 	layout.push<float>(2);
 
-	VertexArray& mesh = *s_mesh;
+	VertexArray& mesh = Pipe::mesh();
 	mesh.addBuffer(vb, layout);
 
 	IndexBuffer ib(indices, 6);
 
 	unsigned int texSlot = 0;
-	Texture& texture = *s_texture;
+	Texture& texture = Pipe::texture();
 	texture.bind(texSlot);
 
-	Shader& shader = *s_shader;
+	Shader& shader = Pipe::shader();
 	shader.bind();
 	shader.setUniformMat4f("u_projMatrix", PROJECTION_MATRIX);
 	shader.setUniform1i("u_texture", texSlot);
@@ -73,7 +68,5 @@ void Pipe::init()
 
 void Pipe::destroy()
 {
-	delete s_mesh;
-	delete s_texture;
-	delete s_shader;
+	delete s_assets;
 }

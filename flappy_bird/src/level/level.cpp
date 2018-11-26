@@ -23,7 +23,7 @@ Level::Level() :
 	m_texture("res/images/bg.jpeg"),
 	m_shader("res/shaders/bg.vert.shader", "res/shaders/bg.frag.shader"),
 	m_cat(),
-	m_pipes(utils::make_array_n<10>(Pipe(0.0f, 0.0f)))
+	m_pipes{Pipe(0.0f, 0.0f), m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0] }
 {
 	constexpr float y = 10.0f * 9.0f / 16.0f;
 
@@ -106,16 +106,9 @@ void Level::createPipes()
 {
 	Pipe::init();
 
-	for (; m_pipe_index < 5 * 2; m_pipe_index += 2)
+	while (m_pipe_index < 5 * 2)
 	{
-		float x = PIPE_INIT_OFFSET + m_pipe_index * 3.0f;
-		float y = 4.0f * std::rand() / RAND_MAX;
-
-		Pipe top(x, y);
-		Pipe bottom(x, y - PIPE_GAP);
-
-		m_pipes[m_pipe_index] = Pipe(x, y);
-		m_pipes[m_pipe_index + 1] = Pipe(x, y - PIPE_GAP);
+		updatePipes();
 	}
 }
 
