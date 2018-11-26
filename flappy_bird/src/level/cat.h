@@ -8,9 +8,10 @@
 
 class Cat
 {
-private:
+public:
 	static const float SIZE;
 
+private:
 	float m_angle, m_dy;
 	glm::vec3 m_position;
 	VertexArray m_mesh;
@@ -20,9 +21,9 @@ private:
 public:
 	Cat();
 
+	inline float y() const { return m_position.y; }
+
 	void update();
 	void render();
-
-private:
 	void fall();
 };

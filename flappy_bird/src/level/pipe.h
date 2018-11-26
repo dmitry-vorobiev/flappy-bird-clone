@@ -15,10 +15,10 @@ struct PipeAssets
 
 class Pipe
 {
-private:
+public:
 	static const float WIDTH, HEIGHT;
+private:
 	static PipeAssets* s_assets;
-
 	glm::vec3 m_position;
 	glm::mat4 m_modelMatrix;
 

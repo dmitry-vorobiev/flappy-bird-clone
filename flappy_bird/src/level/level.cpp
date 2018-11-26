@@ -5,7 +5,6 @@
 #include "../graphics/index_buffer.h"
 #include "../graphics/vertex_buffer.h"
 #include "../graphics/vertex_buffer_layout.h"
-#include "../utils/arrays.h"
 
 #include <cstdlib>
 
@@ -16,6 +15,7 @@ const float Level::PIPE_INIT_OFFSET = 5.0f;
 const float Level::PIPE_GAP = 11.5f;
 
 Level::Level() :
+	m_catAlive(true),
 	m_xScroll(0),
 	m_map(0),
 	m_pipe_index(0),
@@ -23,7 +23,7 @@ Level::Level() :
 	m_texture("res/images/bg.jpeg"),
 	m_shader("res/shaders/bg.vert.shader", "res/shaders/bg.frag.shader"),
 	m_cat(),
-	m_pipes{Pipe(0.0f, 0.0f), m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0] }
+	m_pipes{ Pipe(0.0f, 0.0f), m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0] }
 {
 	constexpr float y = 10.0f * 9.0f / 16.0f;
 
@@ -70,15 +70,24 @@ Level::~Level()
 
 void Level::update()
 {
-	m_xScroll--;
+	if (m_catAlive)
+	{
+		m_xScroll--;
 
-	if (-m_xScroll % 335 == 0)
-		m_map++;
+		if (-m_xScroll % 335 == 0)
+			m_map++;
 
-	if (-m_xScroll > 250 && -m_xScroll % 120 == 0)
-		updatePipes();
+		if (-m_xScroll > 250 && -m_xScroll % 120 == 0)
+			updatePipes();
+	}
 
 	m_cat.update();
+
+	if (m_catAlive && collision())
+	{
+		m_catAlive = false;
+		m_cat.fall();
+	}
 }
 
 void Level::render()
@@ -141,4 +150,29 @@ void Level::renderPipes()
 
 		DEBUG(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 	}
+}
+
+bool Level::collision()
+{
+	for (int i = 0; i < 5 * 2; i++)
+	{
+		float catX = -m_xScroll * 0.05f;
+		float catY = m_cat.y();
+
+		float halfSize = Cat::SIZE / 2.0f;
+
+		float catX0 = catX - halfSize * 2.43f;
+		float catX1 = catX + halfSize;
+		float catY0 = catY - halfSize;
+		float catY1 = catY + halfSize;
+
+		float pipeX0 = m_pipes[i].x();
+		float pipeX1 = pipeX0 + Pipe::WIDTH;
+		float pipeY0 = m_pipes[i].y();
+		float pipeY1 = pipeY0 + Pipe::HEIGHT;
+
+		if (catX1 > pipeX0 && catX0 < pipeX1 && catY1 > pipeY0 && catY0 < pipeY1)
+			return true;
+	}
+	return false;
 }

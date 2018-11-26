@@ -3,7 +3,6 @@
 #include "utils/system_clock.h"
 
 #include <iostream>
-#include <cstdio>
 
 Game::Game(GLFWwindow* window, int width, int height) :
 	m_width(width), 
