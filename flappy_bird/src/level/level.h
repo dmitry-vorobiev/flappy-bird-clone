@@ -15,7 +15,6 @@ private:
 	static const float PIPE_INIT_OFFSET;
 	static const float PIPE_GAP;
 
-	bool m_catAlive;
 	int m_xScroll, m_map;
 	unsigned int m_pipe_index;
 	VertexArray m_background;
@@ -35,6 +34,5 @@ private:
 	void createPipes();
 	void updatePipes();
 	void renderPipes();
-
 	bool collision();
 };

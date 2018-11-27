@@ -12,6 +12,7 @@ const float Cat::HEIGHT = 1.0f;
 const float Cat::WIDTH = 1.61904762f * Cat::HEIGHT;
 
 Cat::Cat() :
+	m_alive(true),
 	m_angle(0.0f),
 	m_dy(0.0f),
 	m_position(0.0f, 0.0f, 0.0f),
@@ -24,10 +25,10 @@ Cat::Cat() :
 	const float z = 0.2f;
 
 	float vertices[] {
-		-x, -y,  z, 0.0f, 1.0f,
-		-x,  y,  z, 0.0f, 0.0f,
-		 x,  y,  z, 1.0f, 0.0f,
-		 x, -y,  z, 1.0f, 1.0f
+		-x, -y,  z,		0.0f, 1.0f,
+		-x,  y,  z,		0.0f, 0.0f,
+		 x,  y,  z,		1.0f, 0.0f,
+		 x, -y,  z,		1.0f, 1.0f
 	};
 
 	unsigned int indices[] {
@@ -59,14 +60,15 @@ Cat::Cat() :
 
 void Cat::update()
 {
+	m_angle = -m_dy * 90.0f;
 	m_position.y -= m_dy;
 
-	if (input::isKeyDown(GLFW_KEY_SPACE))
+	if (!m_alive)
+		m_dy = 0.15f;
+	else if (input::isKeyDown(GLFW_KEY_SPACE))
 		m_dy = -0.15f;
 	else
 		m_dy += 0.01f;
-
-	m_angle = -m_dy * 90.0f;
 }
 
 void Cat::fall()

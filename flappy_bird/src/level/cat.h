@@ -12,6 +12,7 @@ public:
 	static const float WIDTH, HEIGHT;
 
 private:
+	float m_alive;
 	float m_angle, m_dy;
 	glm::vec3 m_position;
 	VertexArray m_mesh;
@@ -21,9 +22,13 @@ private:
 public:
 	Cat();
 
+	inline bool isAlive() const { return m_alive; }
 	inline float y() const { return m_position.y; }
 
 	void update();
 	void render();
+	inline void die() { m_alive = false; };
+
+private:
 	void fall();
 };

@@ -16,7 +16,6 @@ const float Level::PIPE_INIT_OFFSET = 5.0f;
 const float Level::PIPE_GAP = 12.0f;
 
 Level::Level() :
-	m_catAlive(true),
 	m_xScroll(0),
 	m_map(0),
 	m_pipe_index(0),
@@ -71,7 +70,7 @@ Level::~Level()
 
 void Level::update()
 {
-	if (m_catAlive)
+	if (m_cat.isAlive())
 	{
 		m_xScroll--;
 
@@ -84,11 +83,8 @@ void Level::update()
 
 	m_cat.update();
 
-	if (m_catAlive && collision())
-	{
-		m_catAlive = false;
-		m_cat.fall();
-	}
+	if (m_cat.isAlive() && collision())
+		m_cat.die();
 }
 
 void Level::render()
