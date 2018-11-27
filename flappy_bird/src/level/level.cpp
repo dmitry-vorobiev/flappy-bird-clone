@@ -161,12 +161,10 @@ bool Level::collision()
 		float catX = -m_xScroll * 0.05f;
 		float catY = m_cat.y();
 
-		float halfSize = Cat::SIZE / 2.0f;
-
-		float catX0 = catX - halfSize * 2.43f;
-		float catX1 = catX + halfSize;
-		float catY0 = catY - halfSize;
-		float catY1 = catY + halfSize;
+		float catX0 = catX - Cat::WIDTH / 2.0f;
+		float catX1 = catX + Cat::WIDTH / 2.0f;
+		float catY0 = catY - Cat::HEIGHT / 2.0f;
+		float catY1 = catY + Cat::HEIGHT / 2.0f;
 
 		float pipeX0 = m_pipes[i].x();
 		float pipeX1 = pipeX0 + Pipe::WIDTH;

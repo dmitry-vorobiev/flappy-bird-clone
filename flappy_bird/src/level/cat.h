@@ -9,7 +9,7 @@
 class Cat
 {
 public:
-	static const float SIZE;
+	static const float WIDTH, HEIGHT;
 
 private:
 	float m_angle, m_dy;
