@@ -121,6 +121,8 @@
     <None Include="res\shaders\cat.frag.shader" />
     <None Include="res\shaders\pipe.vert.shader" />
     <None Include="res\shaders\pipe.frag.shader" />
+    <None Include="res\shaders\fade.frag.shader" />
+    <None Include="res\shaders\fade.vert.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\images\bg.jpeg">

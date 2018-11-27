@@ -170,6 +170,8 @@
     <None Include="res\shaders\bg.vert.shader" />
     <None Include="res\shaders\cat.frag.shader" />
     <None Include="res\shaders\cat.vert.shader" />
+    <None Include="res\shaders\fade.frag.shader" />
+    <None Include="res\shaders\fade.vert.shader" />
     <None Include="res\shaders\pipe.frag.shader" />
     <None Include="res\shaders\pipe.vert.shader" />
   </ItemGroup>

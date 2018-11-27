@@ -15,11 +15,12 @@ private:
 	static const float PIPE_INIT_OFFSET;
 	static const float PIPE_GAP;
 
+	float m_time;
 	int m_xScroll, m_map;
 	unsigned int m_pipe_index;
-	VertexArray m_background;
+	VertexArray m_background, m_fadeEffect;
 	Texture m_texture;
-	Shader m_shader;
+	Shader m_bgShader, m_fadeShader;
 	Cat m_cat;
 	std::array<Pipe, 10> m_pipes;
 

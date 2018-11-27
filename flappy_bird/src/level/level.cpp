@@ -16,12 +16,15 @@ const float Level::PIPE_INIT_OFFSET = 5.0f;
 const float Level::PIPE_GAP = 12.0f;
 
 Level::Level() :
+	m_time(0),
 	m_xScroll(0),
 	m_map(0),
 	m_pipe_index(0),
 	m_background(true, 6),
+	m_fadeEffect(false, 6),
 	m_texture("res/images/background.png"),
-	m_shader("res/shaders/bg.vert.shader", "res/shaders/bg.frag.shader"),
+	m_bgShader("res/shaders/bg.vert.shader", "res/shaders/bg.frag.shader"),
+	m_fadeShader("res/shaders/fade.vert.shader", "res/shaders/fade.frag.shader"),
 	m_cat(),
 	m_pipes(utils::arrays::make_array_n<10>(Pipe(0.0f, 0.0f)))
 {
@@ -51,14 +54,17 @@ Level::Level() :
 	unsigned int texSlot = 0;
 	m_texture.bind(texSlot);
 
-	m_shader.bind();
-	m_shader.setUniformMat4f("u_projMatrix", PROJECTION_MATRIX);
-	m_shader.setUniform1i("u_texture", texSlot);
+	m_bgShader.bind();
+	m_bgShader.setUniformMat4f("u_projMatrix", PROJECTION_MATRIX);
+	m_bgShader.setUniform1i("u_texture", texSlot);
+
+	m_fadeShader.bind();
+	m_fadeShader.setUniformMat4f("u_projMatrix", PROJECTION_MATRIX);
 
 	m_background.unbind();
 	vb.unbind();
 	ib.unbind();
-	m_shader.unbind();
+	m_bgShader.unbind();
 
 	createPipes();
 }
@@ -85,12 +91,14 @@ void Level::update()
 
 	if (m_cat.isAlive() && collision())
 		m_cat.die();
+
+	m_time += 0.015f;
 }
 
 void Level::render()
 {
 	m_texture.bind();
-	m_shader.bind();
+	m_bgShader.bind();
 	m_background.bind();
 
 	for (auto i = m_map; i < m_map + 4; i++)
@@ -100,12 +108,19 @@ void Level::render()
 		float x = i * 10 + m_xScroll * 0.03f;
 		mat4 viewMatrix = translate(mat4(1.0f), vec3(x, 0.0f, 0.0f));
 
-		m_shader.setUniformMat4f("u_viewMatrix", viewMatrix);
+		m_bgShader.setUniformMat4f("u_viewMatrix", viewMatrix);
 		m_background.draw();
 	}
 
 	renderPipes();
 	m_cat.render();
+
+	if (m_time <= 1.0f)
+	{
+		m_fadeShader.bind();
+		m_fadeShader.setUniform1f("u_time", m_time);
+		m_fadeEffect.draw();
+	}
 }
 
 void Level::createPipes()
