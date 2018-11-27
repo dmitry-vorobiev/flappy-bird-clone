@@ -2,6 +2,7 @@
 #include "pipe.h"
 #include "../errors.h"
 #include "../global.h"
+#include "../utils/arrays.h"
 #include "../graphics/index_buffer.h"
 #include "../graphics/vertex_buffer.h"
 #include "../graphics/vertex_buffer_layout.h"
@@ -23,7 +24,7 @@ Level::Level() :
 	m_texture("res/images/background.png"),
 	m_shader("res/shaders/bg.vert.shader", "res/shaders/bg.frag.shader"),
 	m_cat(),
-	m_pipes{ Pipe(0.0f, 0.0f), m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0], m_pipes[0] }
+	m_pipes(utils::arrays::make_array_n<10>(Pipe(0.0f, 0.0f)))
 {
 	constexpr float y = 10.0f * 9.0f / 16.0f;
 
