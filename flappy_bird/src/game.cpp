@@ -57,7 +57,6 @@ void Game::update()
 		glfwSetWindowShouldClose(m_window, GL_TRUE);
 		m_active = false;
 	}
-
 	m_level.update();
 }
 

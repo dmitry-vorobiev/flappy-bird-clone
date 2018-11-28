@@ -27,6 +27,7 @@ public:
 
 	void update();
 	void render();
+	void reset();
 	inline void die() { m_alive = false; };
 
 private:

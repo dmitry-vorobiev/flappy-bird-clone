@@ -30,6 +30,7 @@ public:
 
 	void update();
 	void render();
+	void reset();
 
 private:
 	void createPipes();

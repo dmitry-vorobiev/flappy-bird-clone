@@ -90,3 +90,11 @@ void Cat::render()
 	m_shader.setUniformMat4f("u_modelMatrix", transform);
 	m_mesh.draw();
 }
+
+void Cat::reset()
+{
+	m_alive = true;
+	m_angle = 0.0f;
+	m_dy = 0.0f;
+	m_position.y = 0.0f;
+}

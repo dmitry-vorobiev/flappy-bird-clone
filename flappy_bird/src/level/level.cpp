@@ -2,6 +2,7 @@
 #include "pipe.h"
 #include "../errors.h"
 #include "../global.h"
+#include "../input.h"
 #include "../utils/arrays.h"
 #include "../graphics/index_buffer.h"
 #include "../graphics/vertex_buffer.h"
@@ -80,18 +81,21 @@ void Level::update()
 	{
 		m_xScroll--;
 
+		if (collision())
+			m_cat.die();
+
 		if (-m_xScroll % 335 == 0)
 			m_map++;
 
 		if (-m_xScroll > 250 && -m_xScroll % 120 == 0)
 			updatePipes();
 	}
+	else if (input::isKeyDown(GLFW_KEY_SPACE))
+	{
+		return reset();
+	}
 
 	m_cat.update();
-
-	if (m_cat.isAlive() && collision())
-		m_cat.die();
-
 	m_time += 0.015f;
 }
 
@@ -188,4 +192,15 @@ bool Level::collision()
 			return true;
 	}
 	return false;
+}
+
+void Level::reset()
+{
+	m_time = 0.0f;
+	m_xScroll = 0;
+	m_map = 0;
+	m_pipe_index = 0;
+
+	m_cat.reset();
+	createPipes();
 }
