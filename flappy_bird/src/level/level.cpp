@@ -28,7 +28,7 @@ Level::Level() :
 	m_cat(),
 	m_pipes(utils::arrays::make_array_n<10>(Pipe(0.0f, 0.0f)))
 {
-	constexpr float y = 10.0f * 9.0f / 16.0f;
+	const float y = HALF_SCREEN_SIZE_Y;
 
 	float vertices[] {
 		-10.0f, -y,  0.0f, 1.0f,
@@ -99,6 +99,7 @@ void Level::render()
 {
 	m_texture.bind();
 	m_bgShader.bind();
+	m_bgShader.setUniform2f("u_cat", 0.0f, m_cat.y());
 	m_background.bind();
 
 	for (auto i = m_map; i < m_map + 4; i++)
@@ -151,6 +152,7 @@ void Level::renderPipes()
 
 	mat4 transform = translate(mat4(1.0f), vec3(m_xScroll * 0.05f, 0.0f, 0.0f));
 	shader.setUniformMat4f("u_viewMatrix", transform);
+	shader.setUniform2f("u_cat", 0.0f, m_cat.y());
 
 	Pipe::texture().bind();
 

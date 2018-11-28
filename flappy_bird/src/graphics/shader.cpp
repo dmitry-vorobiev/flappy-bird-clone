@@ -43,6 +43,11 @@ void Shader::setUniform1f(const std::string& name, float value)
 	DEBUG(glUniform1f(uniformLoc(name), value));
 }
 
+void Shader::setUniform2f(const std::string& name, float v0, float v1)
+{
+	DEBUG(glUniform2f(uniformLoc(name), v0, v1));
+}
+
 void Shader::setUniform4f(const std::string& name, float v0, float v1, float v2, float v3)
 {
 	DEBUG(glUniform4f(uniformLoc(name), v0, v1, v2, v3));

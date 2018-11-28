@@ -6,6 +6,7 @@ layout(location = 1) in vec2 in_texCoords;
 out DATA
 {
 	vec2 texCoords;
+	vec3 position;
 } vs_out;
 
 uniform mat4 u_projMatrix;
@@ -16,4 +17,5 @@ void main()
 {
 	gl_Position = u_projMatrix * u_viewMatrix * u_modelMatrix * in_pos;
 	vs_out.texCoords = in_texCoords;
+	vs_out.position = vec3(u_viewMatrix * u_modelMatrix * in_pos);
 }
