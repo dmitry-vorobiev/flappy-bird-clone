@@ -23,7 +23,7 @@ Level::Level() :
 	m_pipe_index(0),
 	m_background(true, 6),
 	m_fadeEffect(false, 6),
-	m_texture("res/images/background.png"),
+	m_texture("res/images/bg.png"),
 	m_bgShader("res/shaders/bg.vert.shader", "res/shaders/bg.frag.shader"),
 	m_fadeShader("res/shaders/fade.vert.shader", "res/shaders/fade.frag.shader"),
 	m_cat(),
@@ -34,8 +34,8 @@ Level::Level() :
 	float vertices[] {
 		-10.0f, -y,  0.0f, 1.0f,
 		-10.0f,  y,  0.0f, 0.0f,
-		 0.0f,   y,  1.0f, 0.0f,
-		 0.0f,  -y,  1.0f, 1.0f
+		 20.0f,   y,  1.0f, 0.0f,
+		 20.0f,  -y,  1.0f, 1.0f
 	};
 
 	unsigned int indices[] {
@@ -106,11 +106,11 @@ void Level::render()
 	m_bgShader.setUniform2f("u_cat", 0.0f, m_cat.y());
 	m_background.bind();
 
-	for (auto i = m_map; i < m_map + 4; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		using namespace glm;
 
-		float x = i * 10 + m_xScroll * 0.03f;
+		float x = i * 30 + (m_xScroll % 1080) / 36.0f;
 		mat4 viewMatrix = translate(mat4(1.0f), vec3(x, 0.0f, 0.0f));
 
 		m_bgShader.setUniformMat4f("u_viewMatrix", viewMatrix);
