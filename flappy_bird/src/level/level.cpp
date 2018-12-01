@@ -19,7 +19,6 @@ const float Level::PIPE_GAP = 12.0f;
 Level::Level() :
 	m_time(0),
 	m_xScroll(0),
-	m_map(0),
 	m_pipe_index(0),
 	m_background(true, 6),
 	m_fadeEffect(false, 6),
@@ -83,9 +82,6 @@ void Level::update()
 
 		if (collision())
 			m_cat.die();
-
-		if (-m_xScroll % 335 == 0)
-			m_map++;
 
 		if (-m_xScroll > 250 && -m_xScroll % 120 == 0)
 			updatePipes();
@@ -198,7 +194,6 @@ void Level::reset()
 {
 	m_time = 0.0f;
 	m_xScroll = 0;
-	m_map = 0;
 	m_pipe_index = 0;
 
 	m_cat.reset();

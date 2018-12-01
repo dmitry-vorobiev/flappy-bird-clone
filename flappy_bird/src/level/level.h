@@ -16,7 +16,7 @@ private:
 	static const float PIPE_GAP;
 
 	float m_time;
-	int m_xScroll, m_map;
+	int m_xScroll;
 	unsigned int m_pipe_index;
 	VertexArray m_background, m_fadeEffect;
 	Texture m_texture;
