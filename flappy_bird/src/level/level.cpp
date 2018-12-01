@@ -28,13 +28,13 @@ Level::Level() :
 	m_cat(),
 	m_pipes(utils::arrays::make_array_n<10>(Pipe(0.0f, 0.0f)))
 {
-	const float y = HALF_SCREEN_SIZE_Y;
+	constexpr float y = HALF_SCREEN_SIZE_Y;
 
 	float vertices[] {
 		-10.0f, -y,  0.0f, 1.0f,
 		-10.0f,  y,  0.0f, 0.0f,
-		 20.0f,   y,  1.0f, 0.0f,
-		 20.0f,  -y,  1.0f, 1.0f
+		 20.0f,  y,  1.0f, 0.0f,
+		 20.0f, -y,  1.0f, 1.0f
 	};
 
 	unsigned int indices[] {
@@ -137,10 +137,11 @@ void Level::createPipes()
 void Level::updatePipes()
 {
 	float x = PIPE_INIT_OFFSET + m_pipe_index * 3.0f;
-	float y = 4.0f * std::rand() / RAND_MAX;
+	float y0 = 3.5f * std::rand() / RAND_MAX;
+	float y1 = y0 - PIPE_GAP;
 
-	m_pipes[m_pipe_index++ % 10] = Pipe(x, y);
-	m_pipes[m_pipe_index++ % 10] = Pipe(x, y - PIPE_GAP);
+	m_pipes[m_pipe_index++ % 10] = Pipe(x, y0);
+	m_pipes[m_pipe_index++ % 10] = Pipe(x, y1);
 }
 
 void Level::renderPipes()

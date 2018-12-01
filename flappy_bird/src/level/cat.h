@@ -9,7 +9,7 @@
 class Cat
 {
 public:
-	static const float WIDTH, HEIGHT;
+	static const float WIDTH, HEIGHT, GRAVITY;
 
 private:
 	float m_alive;
@@ -29,7 +29,4 @@ public:
 	void render();
 	void reset();
 	inline void die() { m_alive = false; };
-
-private:
-	void fall();
 };
