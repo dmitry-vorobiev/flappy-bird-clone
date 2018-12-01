@@ -11,7 +11,7 @@ const float Cat::HEIGHT = 1.0f;
 
 const float Cat::WIDTH = 1.61904762f * Cat::HEIGHT;
 
-const float Cat::GRAVITY = 0.01f;
+const float Cat::GRAVITY = 0.006f;
 
 Cat::Cat() :
 	m_alive(true),
@@ -69,7 +69,7 @@ void Cat::update()
 	if (!m_alive)
 		m_dy = 0.15f;
 	else if (input::isKeyDown(GLFW_KEY_SPACE))
-		m_dy = -0.125f;
+		m_dy -= 0.014f;
 }
 
 void Cat::render()
