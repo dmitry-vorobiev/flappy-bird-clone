@@ -9,16 +9,14 @@
 #include "../graphics/vertex_buffer_layout.h"
 
 #include <cstdlib>
+#include <cmath>
 
 #include "glm/glm.hpp"
 
-const float Level::PIPE_INIT_OFFSET = 5.0f;
-
-const float Level::PIPE_GAP = 12.0f;
 
 Level::Level() :
 	m_time(0),
-	m_xScroll(0),
+	m_distance(0),
 	m_pipe_index(0),
 	m_background(true, 6),
 	m_fadeEffect(false, 6),
@@ -76,17 +74,17 @@ Level::~Level()
 
 void Level::update()
 {
-	if (m_cat.isAlive())
+	if (m_cat.alive())
 	{
-		m_xScroll--;
+		m_distance++;
 
 		if (collision())
 			m_cat.die();
 
-		if (-m_xScroll > 250 && -m_xScroll % 120 == 0)
+		if (m_distance > 250 && m_distance % 120 == 0)
 			updatePipes();
 	}
-	else if (input::isKeyDown(GLFW_KEY_SPACE))
+	else if (m_cat.y() < -HALF_SCREEN_SIZE_Y && input::isKeyDown(GLFW_KEY_SPACE))
 	{
 		return reset();
 	}
@@ -106,7 +104,7 @@ void Level::render()
 	{
 		using namespace glm;
 
-		float x = i * 30 + (m_xScroll % 1080) / 36.0f;
+		float x = i * 30 - (m_distance % 1080) / 36.0f;
 		mat4 viewMatrix = translate(mat4(1.0f), vec3(x, 0.0f, 0.0f));
 
 		m_bgShader.setUniformMat4f("u_viewMatrix", viewMatrix);
@@ -151,7 +149,7 @@ void Level::renderPipes()
 	Shader& shader = Pipe::shader();
 	shader.bind();
 
-	mat4 transform = translate(mat4(1.0f), vec3(m_xScroll * 0.05f, 0.0f, 0.0f));
+	mat4 transform = translate(mat4(1.0f), vec3(m_distance * -0.05f, 0.0f, 0.0f));
 	shader.setUniformMat4f("u_viewMatrix", transform);
 	shader.setUniform2f("u_cat", 0.0f, m_cat.y());
 
@@ -172,8 +170,11 @@ bool Level::collision()
 {
 	for (int i = 0; i < 5 * 2; i++)
 	{
-		float catX = -m_xScroll * 0.05f;
+		float catX = m_distance * 0.05f;
 		float catY = m_cat.y();
+
+		if (abs(catY) > HALF_SCREEN_SIZE_Y)
+			return true;
 
 		float catX0 = catX - Cat::WIDTH / 2.0f;
 		float catX1 = catX + Cat::WIDTH / 2.0f;
@@ -194,7 +195,7 @@ bool Level::collision()
 void Level::reset()
 {
 	m_time = 0.0f;
-	m_xScroll = 0;
+	m_distance = 0;
 	m_pipe_index = 0;
 
 	m_cat.reset();

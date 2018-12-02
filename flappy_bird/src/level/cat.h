@@ -9,7 +9,9 @@
 class Cat
 {
 public:
-	static const float WIDTH, HEIGHT, GRAVITY;
+	static constexpr float HEIGHT = 1.0f;
+	static constexpr float WIDTH = 1.61904762f * Cat::HEIGHT;
+	static constexpr float GRAVITY = 0.006f;
 
 private:
 	float m_alive;
@@ -22,7 +24,7 @@ private:
 public:
 	Cat();
 
-	inline bool isAlive() const { return m_alive; }
+	inline bool alive() const { return m_alive; }
 	inline float y() const { return m_position.y; }
 
 	void update();

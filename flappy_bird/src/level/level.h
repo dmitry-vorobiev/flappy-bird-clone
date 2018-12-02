@@ -12,12 +12,11 @@
 class Level
 {
 private:
-	static const float PIPE_INIT_OFFSET;
-	static const float PIPE_GAP;
+	static constexpr float PIPE_INIT_OFFSET = 5.0f;
+	static constexpr float PIPE_GAP = 12.0f;
 
 	float m_time;
-	int m_xScroll;
-	unsigned int m_pipe_index;
+	unsigned int m_distance, m_pipe_index;
 	VertexArray m_background, m_fadeEffect;
 	Texture m_texture;
 	Shader m_bgShader, m_fadeShader;

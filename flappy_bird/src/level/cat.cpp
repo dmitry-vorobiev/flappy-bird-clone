@@ -7,12 +7,6 @@
 #include "../graphics/vertex_buffer_layout.h"
 
 
-const float Cat::HEIGHT = 1.0f;
-
-const float Cat::WIDTH = 1.61904762f * Cat::HEIGHT;
-
-const float Cat::GRAVITY = 0.006f;
-
 Cat::Cat() :
 	m_alive(true),
 	m_angle(0.0f),
@@ -22,9 +16,9 @@ Cat::Cat() :
 	m_texture("res/images/cat.png"),
 	m_shader("res/shaders/cat.vert.shader", "res/shaders/cat.frag.shader")
 {
-	const float x = Cat::WIDTH / 2.0f;
-	const float y = Cat::HEIGHT / 2.0f;
-	const float z = 0.2f;
+	constexpr float x = Cat::WIDTH / 2.0f;
+	constexpr float y = Cat::HEIGHT / 2.0f;
+	constexpr float z = 0.2f;
 
 	float vertices[] {
 		-x, -y,  z,		0.0f, 1.0f,
