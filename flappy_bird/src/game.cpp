@@ -31,13 +31,13 @@ void Game::run()
 	while (m_active)
 	{
 		uint64_t now = time.nanosec();
-		delta += (now - lastTime) / ns;
+		delta += now - lastTime;
 		lastTime = now;
 
-		if (delta >= 1.0)
+		if (delta > ns)
 		{
+			delta -= ns;
 			update();
-			delta--;
 		}
 		render();
 	}
