@@ -23,4 +23,3 @@ I took the background image for this game from [DeviantArt](https://www.devianta
 ## Screenshot
 
 ![Screenshot](/docs/screen.png)
-Format: ![Alt Text](url)
