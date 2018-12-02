@@ -15,10 +15,10 @@ There are also some minor game mechanics changes inspired by this video:
 I took the background image for this game from [DeviantArt](https://www.deviantart.com/roulettesplay/art/Pixel-Wallpaper-519521478) and cropped it a bit. [Here the link for artist page](https://www.deviantart.com/roulettesplay).
 
 ## Dependencies
-- GLFW,
-- GLEW (32-bit, static),
-- glm,
-- nothings/stb/stb_image,
+- [GLFW](https://www.glfw.org),
+- [The OpenGL Extension Wrangler Library (GLEW)](http://glew.sourceforge.net). 32-bit static linkage version is used,
+- [OpenGL Mathematics](https://glm.g-truc.net),
+- [nothings/stb/stb_image](https://github.com/nothings/stb),
 
 ## Screenshot
 
