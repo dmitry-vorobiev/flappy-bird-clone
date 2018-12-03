@@ -12,5 +12,5 @@ uniform sampler2D u_texture;
 void main()
 {
 	out_color = texture(u_texture, fs_in.texCoords);
-	out_color.w = 0.6;
+	out_color.w = 0.75;
 }
