@@ -12,7 +12,5 @@ uniform sampler2D u_texture;
 void main()
 {
 	out_color = texture(u_texture, fs_in.texCoords);
-
-	if (out_color.w < 1.0f)
-		discard;
+	out_color.w = 0.75;
 }

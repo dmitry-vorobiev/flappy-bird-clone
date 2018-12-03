@@ -21,7 +21,7 @@ Pipe::Pipe(float x, float y) :
 
 void Pipe::init()
 {
-	const float z = 0.1f;
+	const float z = 0.3f;
 
 	float vertices[]{
 		 0.0f,   0.0f, z, 0.0f, 1.0f,
