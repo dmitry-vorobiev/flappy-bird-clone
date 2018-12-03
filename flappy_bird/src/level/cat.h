@@ -4,6 +4,8 @@
 #include "../graphics/texture.h"
 #include "../graphics/vertex_array.h"
 
+#include "tail.h"
+
 #include "glm/glm.hpp"
 
 class Cat
@@ -20,6 +22,7 @@ private:
 	VertexArray m_mesh;
 	Texture m_texture;
 	Shader m_shader;
+	Tail m_tail;
 	
 public:
 	Cat();

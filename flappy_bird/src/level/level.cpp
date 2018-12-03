@@ -79,7 +79,8 @@ void Level::update()
 		m_distance++;
 
 		if (collision())
-			m_cat.die();
+		{ }
+			//m_cat.die();
 
 		if (m_distance > 250 && m_distance % 120 == 0)
 			updatePipes();

@@ -57,6 +57,9 @@
     <ClCompile Include="src\level\pipe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\level\tail.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game.h">
@@ -113,6 +116,9 @@
     <ClInclude Include="src\utils\arrays.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\level\tail.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\bg.vert.shader" />
@@ -123,6 +129,8 @@
     <None Include="res\shaders\pipe.frag.shader" />
     <None Include="res\shaders\fade.frag.shader" />
     <None Include="res\shaders\fade.vert.shader" />
+    <None Include="res\shaders\tail.vert.shader" />
+    <None Include="res\shaders\tail.frag.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\images\bg.jpeg">
@@ -132,6 +140,15 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\images\pipe.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\images\cat.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\images\bg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\images\tail.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

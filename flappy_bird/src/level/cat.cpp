@@ -14,7 +14,8 @@ Cat::Cat() :
 	m_position(0.0f, 0.0f, 0.0f),
 	m_mesh(true, 6),
 	m_texture("res/images/cat.png"),
-	m_shader("res/shaders/cat.vert.shader", "res/shaders/cat.frag.shader")
+	m_shader("res/shaders/cat.vert.shader", "res/shaders/cat.frag.shader"),
+	m_tail()
 {
 	constexpr float x = Cat::WIDTH / 2.0f;
 	constexpr float y = Cat::HEIGHT / 2.0f;
@@ -64,6 +65,8 @@ void Cat::update()
 		m_dy = 0.15f;
 	else if (input::isKeyDown(GLFW_KEY_SPACE))
 		m_dy -= 0.014f;
+
+	m_tail.update(m_position.y, m_angle);
 }
 
 void Cat::render()
@@ -79,6 +82,8 @@ void Cat::render()
 	transform = rotate(transform, radians(m_angle), vec3(0.0f, 0.0f, 1.0f));
 	m_shader.setUniformMat4f("u_modelMatrix", transform);
 	m_mesh.draw();
+
+	m_tail.render();
 }
 
 void Cat::reset()
