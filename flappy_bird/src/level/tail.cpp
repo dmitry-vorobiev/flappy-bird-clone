@@ -17,7 +17,7 @@ Tail::Tail() :
 	m_texture("res/images/tail.png"),
 	m_shader("res/shaders/tail.vert.shader", "res/shaders/tail.frag.shader")
 {
-	constexpr float x = 0.05;
+	constexpr float x = 0.08f;
 	constexpr float y = Cat::HEIGHT / 3.0f;
 	constexpr float z = 0.15f;
 
@@ -59,7 +59,7 @@ void Tail::update(float y, float angle)
 {
 	m_updIndex = (m_updIndex + 1) % ELEMENTS;
 	m_y[m_updIndex] = y;
-	m_angle[m_updIndex] = angle;
+	m_angle[m_updIndex] = angle * 0.33f;
 }
 
 void Tail::render()

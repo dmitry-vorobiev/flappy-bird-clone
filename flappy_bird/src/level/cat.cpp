@@ -61,9 +61,7 @@ void Cat::update()
 	m_position.y -= m_dy;
 	m_dy += Cat::GRAVITY;
 
-	if (!m_alive)
-		m_dy = 0.15f;
-	else if (input::isKeyDown(GLFW_KEY_SPACE))
+	if (m_alive && input::isKeyDown(GLFW_KEY_SPACE))
 		m_dy -= 0.014f;
 
 	m_tail.update(m_position.y, m_angle);
