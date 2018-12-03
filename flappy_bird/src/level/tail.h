@@ -11,9 +11,11 @@
 class Tail
 {
 private:
+	static constexpr char ELEMENTS = 60;
+
 	unsigned int m_updIndex;
-	std::array<float, 10> m_y;
-	std::array<float, 10> m_angle;
+	std::array<float, ELEMENTS> m_y;
+	std::array<float, ELEMENTS> m_angle;
 	VertexArray m_mesh;
 	Texture m_texture;
 	Shader m_shader;

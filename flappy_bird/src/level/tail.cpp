@@ -11,20 +11,21 @@
 
 Tail::Tail() :
 	m_updIndex(0),
-	m_y(utils::arrays::make_array_n<10>(0.0f)),
-	m_angle(utils::arrays::make_array_n<10>(0.0f)),
+	m_y(utils::arrays::make_array_n<ELEMENTS>(0.0f)),
+	m_angle(utils::arrays::make_array_n<ELEMENTS>(0.0f)),
 	m_mesh(true, 6),
 	m_texture("res/images/tail.png"),
 	m_shader("res/shaders/tail.vert.shader", "res/shaders/tail.frag.shader")
 {
+	constexpr float x = 0.05;
 	constexpr float y = Cat::HEIGHT / 3.0f;
 	constexpr float z = 0.15f;
 
 	float verticies[]{
-		-0.12f, -y, z,	0.0f, 1.0f,
-		-0.12f,  y, z,	0.0f, 0.0f,
-		 0.12f,  y, z,	1.0f, 0.0f,
-		 0.12f, -y, z,	1.0f, 1.0f
+		-x, -y,  z,	 0.0f, 1.0f,
+		-x,  y,  z,	 0.0f, 0.0f,
+		 x,  y,  z,	 1.0f, 0.0f,
+		 x, -y,  z,	 1.0f, 1.0f
 	};
 
 	unsigned int indices[]{
@@ -56,7 +57,7 @@ Tail::Tail() :
 
 void Tail::update(float y, float angle)
 {
-	m_updIndex = (m_updIndex + 1) % 10;
+	m_updIndex = (m_updIndex + 1) % ELEMENTS;
 	m_y[m_updIndex] = y;
 	m_angle[m_updIndex] = angle;
 }
@@ -69,12 +70,12 @@ void Tail::render()
 	m_texture.bind();
 	m_shader.bind();
 
-	for (auto i = 0; i < 10; i++)
+	for (auto i = 0; i < ELEMENTS; i++)
 	{
-		auto index = (m_updIndex + (10 - i)) % 10;
+		auto index = (m_updIndex + (ELEMENTS - i)) % ELEMENTS;
 
 		mat4 transform(1.0f);
-		transform = translate(transform, vec3(-Cat::WIDTH / 2.8f - 0.2f * i, m_y[index], 0.0f));
+		transform = translate(transform, vec3(-Cat::WIDTH / 3.2f - 0.08f * i, m_y[index], 0.0f));
 		transform = rotate(transform, radians(m_angle[index]), vec3(0.0f, 0.0f, 1.0f));
 		m_shader.setUniformMat4f("u_modelMatrix", transform);
 		m_mesh.draw();
