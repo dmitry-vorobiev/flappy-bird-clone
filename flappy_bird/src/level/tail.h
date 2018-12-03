@@ -25,4 +25,5 @@ public:
 
 	void update(float y, float angle);
 	void render();
+	void reset();
 };

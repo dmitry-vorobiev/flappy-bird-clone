@@ -81,3 +81,10 @@ void Tail::render()
 		m_mesh.draw();
 	}
 }
+
+void Tail::reset()
+{
+	m_updIndex = 0;
+	m_y = utils::arrays::make_array_n<ELEMENTS>(0.0f);
+	m_angle = utils::arrays::make_array_n<ELEMENTS>(0.0f);
+}

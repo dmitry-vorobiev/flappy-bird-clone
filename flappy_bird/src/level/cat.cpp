@@ -92,4 +92,5 @@ void Cat::reset()
 	m_angle = 0.0f;
 	m_dy = 0.0f;
 	m_position.y = 0.0f;
+	m_tail.reset();
 }
