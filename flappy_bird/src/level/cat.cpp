@@ -22,10 +22,10 @@ Cat::Cat() :
 	constexpr float z = 0.2f;
 
 	float vertices[] {
-		-x, -y,  z,		0.0f, 1.0f,
-		-x,  y,  z,		0.0f, 0.0f,
-		 x,  y,  z,		1.0f, 0.0f,
-		 x, -y,  z,		1.0f, 1.0f
+		-x, -y,  z,	 0.0f, 1.0f,
+		-x,  y,  z,	 0.0f, 0.0f,
+		 x,  y,  z,	 1.0f, 0.0f,
+		 x, -y,  z,	 1.0f, 1.0f
 	};
 
 	unsigned int indices[] {
