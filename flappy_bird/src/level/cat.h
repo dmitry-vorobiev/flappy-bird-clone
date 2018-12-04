@@ -14,7 +14,7 @@ class Cat
 public:
 	static constexpr char FRAMES = 12;
 	static constexpr char FRAME_SWAP_INTERVAL = 4;
-	static constexpr float HEIGHT = 1.0f;
+	static constexpr float HEIGHT = 1.25f;
 	static constexpr float WIDTH = 1.61904762f * Cat::HEIGHT;
 	static constexpr float GRAVITY = 0.006f;
 
