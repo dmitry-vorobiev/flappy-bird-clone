@@ -7,10 +7,12 @@ in DATA
 	vec2 texCoords;
 } fs_in;
 
+uniform float u_alpha;
+
 uniform sampler2D u_texture;
 
 void main()
 {
 	out_color = texture(u_texture, fs_in.texCoords);
-	out_color.w = 0.75;
+	out_color.w = u_alpha;
 }
