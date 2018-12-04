@@ -182,7 +182,19 @@
   <ItemGroup>
     <Image Include="res\images\bg.jpeg" />
     <Image Include="res\images\bg.png" />
-    <Image Include="res\images\cat.png" />
+    <Image Include="res\images\cat\0.png" />
+    <Image Include="res\images\cat\1.png" />
+    <Image Include="res\images\cat\10.png" />
+    <Image Include="res\images\cat\11.png" />
+    <Image Include="res\images\cat\12.png" />
+    <Image Include="res\images\cat\2.png" />
+    <Image Include="res\images\cat\3.png" />
+    <Image Include="res\images\cat\4.png" />
+    <Image Include="res\images\cat\5.png" />
+    <Image Include="res\images\cat\6.png" />
+    <Image Include="res\images\cat\7.png" />
+    <Image Include="res\images\cat\8.png" />
+    <Image Include="res\images\cat\9.png" />
     <Image Include="res\images\cat_rainbow.png" />
     <Image Include="res\images\pipe.png" />
     <Image Include="res\images\tail.png" />

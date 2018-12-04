@@ -5,11 +5,7 @@
 #include "../graphics/index_buffer.h"
 #include "../graphics/vertex_buffer.h"
 #include "../graphics/vertex_buffer_layout.h"
-#include "../utils/arrays.h"
 
-#include <sstream>
-#include <iostream>
-#include <cstdio>
 
 Cat::Cat() :
 	m_alive(true),
