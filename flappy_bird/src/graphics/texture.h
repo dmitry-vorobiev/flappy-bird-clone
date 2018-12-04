@@ -9,6 +9,7 @@ private:
 	unsigned char* m_buffer;
 	int m_width, m_height, m_BPP;
 public:
+	Texture();
 	Texture(const std::string& path);
 	~Texture();
 

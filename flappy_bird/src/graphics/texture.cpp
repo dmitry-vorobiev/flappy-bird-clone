@@ -4,6 +4,12 @@
 
 #include "nothings/stb/stb_image.h"
 
+Texture::Texture()
+	: m_rendererID(0), m_buffer(nullptr), m_width(0), m_height(0), m_BPP(0)
+{
+
+}
+
 Texture::Texture(const std::string& path)
 	: m_rendererID(0), m_buffer(nullptr), m_width(0), m_height(0), m_BPP(0)
 {

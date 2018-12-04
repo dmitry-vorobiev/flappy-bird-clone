@@ -5,15 +5,31 @@
 #include "../graphics/index_buffer.h"
 #include "../graphics/vertex_buffer.h"
 #include "../graphics/vertex_buffer_layout.h"
+#include "../utils/arrays.h"
 
 
 Cat::Cat() :
 	m_alive(true),
+	m_frame(0),
+	m_frameTime(0),
 	m_angle(0.0f),
 	m_dy(0.0f),
 	m_position(0.0f, 0.0f, 0.0f),
 	m_mesh(true, 6),
-	m_texture("res/images/cat.png"),
+	m_textures{ 
+		Texture("res/images/cat/0.png"),
+		Texture("res/images/cat/1.png"),
+		Texture("res/images/cat/2.png"),
+		Texture("res/images/cat/3.png"),
+		Texture("res/images/cat/4.png"),
+		Texture("res/images/cat/5.png"),
+		Texture("res/images/cat/6.png"),
+		Texture("res/images/cat/7.png"),
+		Texture("res/images/cat/8.png"),
+		Texture("res/images/cat/9.png"),
+		Texture("res/images/cat/10.png"),
+		Texture("res/images/cat/11.png")
+	},
 	m_shader("res/shaders/cat.vert.shader", "res/shaders/cat.frag.shader"),
 	m_tail()
 {
@@ -43,7 +59,12 @@ Cat::Cat() :
 	IndexBuffer ib(indices, 6);
 
 	unsigned int texSlot = 0;
-	m_texture.bind(texSlot);
+	//Texture t0("res/images/cat/0.png");
+	//t0.bind(texSlot);
+	//m_textures[0] = t0;
+
+	Texture& t = m_textures[0];
+	t.bind(texSlot);
 
 	m_shader.bind();
 	m_shader.setUniformMat4f("u_projMatrix", PROJECTION_MATRIX);
@@ -57,6 +78,11 @@ Cat::Cat() :
 
 void Cat::update()
 {
+	m_frameTime = ++m_frameTime % FRAME_DELAY;
+
+	if (m_frameTime == 0)
+		m_frame = ++m_frame % FRAMES;
+
 	m_angle = -m_dy * 90.0f;
 	m_position.y -= m_dy;
 	m_dy += Cat::GRAVITY;
@@ -72,7 +98,7 @@ void Cat::render()
 	using namespace glm;
 
 	m_shader.bind();
-	m_texture.bind();
+	m_textures[m_frame].bind();
 	m_mesh.bind();
 
 	mat4 transform(1.0f);

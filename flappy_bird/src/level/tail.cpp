@@ -17,7 +17,7 @@ Tail::Tail() :
 	m_shader("res/shaders/tail.vert.shader", "res/shaders/tail.frag.shader")
 {
 	constexpr float x = 0.08f;
-	constexpr float y = Cat::HEIGHT / 3.0f;
+	constexpr float y = Cat::HEIGHT * 0.3f;
 	constexpr float z = 0.15f;
 
 	float verticies[]{
@@ -57,7 +57,7 @@ Tail::Tail() :
 void Tail::update(float y, float angle)
 {
 	m_updIndex = (m_updIndex + 1) % ELEMENTS;
-	m_chunks[m_updIndex] = Chunk{ y, angle * 0.33f };
+	m_chunks[m_updIndex] = Chunk{ y, angle };
 }
 
 void Tail::render()
