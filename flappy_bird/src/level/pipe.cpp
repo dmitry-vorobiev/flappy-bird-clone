@@ -7,10 +7,6 @@
 
 const glm::mat4 IDENTITY(1.0f);
 
-const float Pipe::WIDTH = 1.5f;
-
-const float Pipe::HEIGHT = 8.0f;
-
 PipeAssets* Pipe::s_assets(nullptr);
 
 Pipe::Pipe(float x, float y) :

@@ -13,7 +13,7 @@ class Level
 {
 private:
 	static constexpr float PIPE_INIT_OFFSET = 5.0f;
-	static constexpr float PIPE_GAP = 12.0f;
+	static constexpr float PIPE_GAP = 12.5f;
 
 	float m_time;
 	unsigned int m_distance, m_pipe_index;

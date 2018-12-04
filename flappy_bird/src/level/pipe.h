@@ -16,7 +16,9 @@ struct PipeAssets
 class Pipe
 {
 public:
-	static const float WIDTH, HEIGHT;
+	static constexpr float WIDTH = 2.0f;
+	static constexpr float HEIGHT = 8.0f;
+
 private:
 	static PipeAssets* s_assets;
 	glm::vec3 m_position;
