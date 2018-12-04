@@ -7,29 +7,19 @@
 #include "../graphics/vertex_buffer_layout.h"
 #include "../utils/arrays.h"
 
+#include <sstream>
+#include <iostream>
+#include <cstdio>
 
 Cat::Cat() :
 	m_alive(true),
-	m_frame(0),
+	m_activeFrame(0),
 	m_frameTime(0),
 	m_angle(0.0f),
 	m_dy(0.0f),
 	m_position(0.0f, 0.0f, 0.0f),
 	m_mesh(true, 6),
-	m_textures{ 
-		Texture("res/images/cat/0.png"),
-		Texture("res/images/cat/1.png"),
-		Texture("res/images/cat/2.png"),
-		Texture("res/images/cat/3.png"),
-		Texture("res/images/cat/4.png"),
-		Texture("res/images/cat/5.png"),
-		Texture("res/images/cat/6.png"),
-		Texture("res/images/cat/7.png"),
-		Texture("res/images/cat/8.png"),
-		Texture("res/images/cat/9.png"),
-		Texture("res/images/cat/10.png"),
-		Texture("res/images/cat/11.png")
-	},
+	m_frames(loadFrames()),
 	m_shader("res/shaders/cat.vert.shader", "res/shaders/cat.frag.shader"),
 	m_tail()
 {
@@ -58,17 +48,9 @@ Cat::Cat() :
 
 	IndexBuffer ib(indices, 6);
 
-	unsigned int texSlot = 0;
-	//Texture t0("res/images/cat/0.png");
-	//t0.bind(texSlot);
-	//m_textures[0] = t0;
-
-	Texture& t = m_textures[0];
-	t.bind(texSlot);
-
 	m_shader.bind();
 	m_shader.setUniformMat4f("u_projMatrix", PROJECTION_MATRIX);
-	m_shader.setUniform1i("u_texture", texSlot);
+	m_shader.setUniform1i("u_texture", 2);
 
 	m_mesh.unbind();
 	vb.unbind();
@@ -78,14 +60,13 @@ Cat::Cat() :
 
 void Cat::update()
 {
-	m_frameTime = ++m_frameTime % FRAME_DELAY;
-
-	if (m_frameTime == 0)
-		m_frame = ++m_frame % FRAMES;
-
+	m_frameTime = ++m_frameTime % FRAME_SWAP_INTERVAL;
 	m_angle = -m_dy * 90.0f;
 	m_position.y -= m_dy;
 	m_dy += Cat::GRAVITY;
+
+	if (m_frameTime == 0)
+		m_activeFrame = ++m_activeFrame % FRAMES;
 
 	if (m_alive && input::isKeyDown(GLFW_KEY_SPACE))
 		m_dy -= 0.014f;
@@ -98,7 +79,7 @@ void Cat::render()
 	using namespace glm;
 
 	m_shader.bind();
-	m_textures[m_frame].bind();
+	m_frames[m_activeFrame].bind(2);
 	m_mesh.bind();
 
 	mat4 transform(1.0f);
@@ -117,4 +98,24 @@ void Cat::reset()
 	m_dy = 0.0f;
 	m_position.y = 0.0f;
 	m_tail.reset();
+}
+
+std::array<Texture, Cat::FRAMES> Cat::loadFrames()
+{
+	/* For some reason I am unable to correctly initialize this in cycle.
+	   At least for now...*/
+	return {
+		Texture("res/images/cat/0.png"),
+		Texture("res/images/cat/1.png"),
+		Texture("res/images/cat/2.png"),
+		Texture("res/images/cat/3.png"),
+		Texture("res/images/cat/4.png"),
+		Texture("res/images/cat/5.png"),
+		Texture("res/images/cat/6.png"),
+		Texture("res/images/cat/7.png"),
+		Texture("res/images/cat/8.png"),
+		Texture("res/images/cat/9.png"),
+		Texture("res/images/cat/10.png"),
+		Texture("res/images/cat/11.png")
+	};
 }
