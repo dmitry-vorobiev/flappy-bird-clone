@@ -80,7 +80,7 @@ void Cat::render()
 
 	mat4 transform(1.0f);
 	transform = translate(transform, m_position);
-	transform = rotate(transform, radians(m_angle), vec3(0.0f, 0.0f, 1.0f));
+	transform = rotate(transform, radians(m_angle), Z_AXIS);
 	m_shader.setUniformMat4f("u_modelMatrix", transform);
 	m_mesh.draw();
 

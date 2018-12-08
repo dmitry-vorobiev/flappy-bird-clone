@@ -79,7 +79,7 @@ void Tail::render()
 		float angle = radians(chunk.angle);
 
 		mat4 transform = translate(init, vec3(-0.08f * i, chunk.y, 0.0f));
-		transform = rotate(transform, angle, vec3(0.0f, 0.0f, 1.0f));
+		transform = rotate(transform, angle, Z_AXIS);
 		transform = scale(transform, vec3(1.0f - sin(angle), cos(angle), 1.0f));
 
 		m_shader.setUniformMat4f("u_modelMatrix", transform);

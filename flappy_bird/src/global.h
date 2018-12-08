@@ -11,3 +11,5 @@ const glm::mat4 PROJECTION_MATRIX = glm::ortho(
 	-HALF_SCREEN_SIZE_X, HALF_SCREEN_SIZE_X, 
 	-HALF_SCREEN_SIZE_Y, HALF_SCREEN_SIZE_Y, 
 	-1.0f, 1.0f);
+
+const glm::vec3 Z_AXIS = glm::vec3(0.0f, 0.0f, 1.0f);
