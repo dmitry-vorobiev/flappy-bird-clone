@@ -74,10 +74,14 @@ void Tail::render()
 		/* This index is used to traverse chunks in a reverse historical order 
 		   (from the most recent records to the oldest ones.*/
 		auto j = (m_updIndex + (ELEMENTS - i)) % ELEMENTS;
+
 		Chunk& chunk = m_chunks[j];
+		float angle = radians(chunk.angle);
 
 		mat4 transform = translate(init, vec3(-0.08f * i, chunk.y, 0.0f));
-		transform = rotate(transform, radians(chunk.angle), vec3(0.0f, 0.0f, 1.0f));
+		transform = rotate(transform, angle, vec3(0.0f, 0.0f, 1.0f));
+		transform = scale(transform, vec3(1.0f - sin(angle), cos(angle), 1.0f));
+
 		m_shader.setUniformMat4f("u_modelMatrix", transform);
 		m_shader.setUniform1f("u_alpha", (ELEMENTS - i * 1.0f) / ELEMENTS);
 		m_mesh.draw();
